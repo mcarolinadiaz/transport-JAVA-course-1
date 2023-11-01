@@ -1,6 +1,6 @@
 package Transport;
 
-public class Vehicle {
+abstract class Vehicle {
     private String model;
     private int year;
     private String propulsion;
@@ -38,4 +38,6 @@ public class Vehicle {
     public void setPropulsion(String propulsion) {
         this.propulsion = propulsion;
     }
+
+    public abstract void startUp();
 }
