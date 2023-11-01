@@ -60,4 +60,9 @@ public class Lorry extends LandVehicle {
     public void setPropulsion(String propulsion) {
         super.setPropulsion(propulsion);
     }
+
+    @Override
+    public void startUp() {
+        System.out.println("The lorry is started up");
+    }
 }

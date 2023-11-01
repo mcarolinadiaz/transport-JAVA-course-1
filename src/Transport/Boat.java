@@ -2,13 +2,16 @@ package Transport;
 
 public class Boat extends WaterVehicle {
     private int anchors;
+    private boolean anchored;
     public Boat() {
         super();
         this.anchors = 4;
+        this.anchored = true;
     }
     public Boat(String model, int year, String propulsion, int length, int anchors) {
         super(model, year, propulsion, length);
         this.anchors = anchors;
+        this.anchored = true;
     }
 
     public int getAnchors() {
@@ -17,6 +20,14 @@ public class Boat extends WaterVehicle {
 
     public void setAnchors(int anchors) {
         this.anchors = anchors;
+    }
+
+    public void raiseAnchors() {
+        this.anchored = false;
+    }
+
+    public void anchored() {
+        this.anchored = true;
     }
 
     public int getLength() {
@@ -49,5 +60,13 @@ public class Boat extends WaterVehicle {
 
     public void setPropulsion(String propulsion) {
         super.setPropulsion(propulsion);
+    }
+
+    @Override
+    public void startUp() {
+        if (this.anchored) {
+            this.raiseAnchors();
+        }
+        System.out.println("The anchors have been raised and the boat is underway");
     }
 }

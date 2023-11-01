@@ -2,7 +2,7 @@ package Transport;
 
 import java.util.ArrayList;
 
-public class LandVehicle extends Vehicle{
+abstract class LandVehicle extends Vehicle{
     private int wheels;
     private ArrayList<String> suitableTerrain;
     public LandVehicle() {
@@ -65,4 +65,6 @@ public class LandVehicle extends Vehicle{
     public void setPropulsion(String propulsion) {
         super.setPropulsion(propulsion);
     }
+
+    public abstract void startUp();
 }

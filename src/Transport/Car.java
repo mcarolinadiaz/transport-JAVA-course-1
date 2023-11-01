@@ -4,13 +4,16 @@ import java.util.ArrayList;
 
 public class Car extends LandVehicle {
     private int doors;
+    private boolean doorsClosed;
     public Car() {
         super();
         this.doors = 4;
+        this.doorsClosed = false;
     }
     public Car(String model, int year, String propulsion, int wheels, ArrayList<String> suitableTerrain, int doors) {
         super(model, year, propulsion, wheels, suitableTerrain);
         this.doors = doors;
+        this.doorsClosed = false;
     }
 
     public int getDoors() {
@@ -59,6 +62,25 @@ public class Car extends LandVehicle {
 
     public void setPropulsion(String propulsion) {
         super.setPropulsion(propulsion);
+    }
+
+    public void openDoors() {
+        this.doorsClosed = false;
+    }
+
+    public void closeDoors() {
+        this.doorsClosed = true;
+    }
+
+    @Override
+    public void startUp() {
+        if (!this.doorsClosed) {
+            System.out.println("The car is started up");
+        }
+        else {
+            this.closeDoors();
+            System.out.println("Doors were closed and The car is started up");
+        }
     }
 
 }

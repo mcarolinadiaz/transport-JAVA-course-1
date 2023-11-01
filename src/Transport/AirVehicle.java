@@ -1,21 +1,14 @@
 package Transport;
 
-public class AirVehicle extends Vehicle {
-    private boolean flying;
+abstract class AirVehicle extends Vehicle {
     public AirVehicle() {
         super();
-        this.flying = false;
     }
     public AirVehicle(String model, int year, String propulsion, boolean flying) {
         super(model, year, propulsion);
-        this.flying = flying;
     }
-    public void takeOff() {
-        this.flying = true;
-    }
-    public void land() {
-        this.flying = false;
-    }
+    public abstract void takeOff();
+    public abstract void land();
 
     public String getModel() {
         return super.getModel();
@@ -41,8 +34,5 @@ public class AirVehicle extends Vehicle {
         super.setPropulsion(propulsion);
     }
 
-    @Override
-    public void startUp() {
-        System.out.println("The plane is started up");
-    }
+    public abstract void startUp();
 }

@@ -1,6 +1,6 @@
 package Transport;
 
-public class WaterVehicle extends Vehicle {
+abstract class WaterVehicle extends Vehicle {
     private int length;
     public WaterVehicle() {
         super();
@@ -42,4 +42,6 @@ public class WaterVehicle extends Vehicle {
     public void setPropulsion(String propulsion) {
         super.setPropulsion(propulsion);
     }
+
+    public abstract void startUp();
 }
