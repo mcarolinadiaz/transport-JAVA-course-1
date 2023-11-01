@@ -1,6 +1,7 @@
 package Transport;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Car extends LandVehicle {
     private int doors;
@@ -72,6 +73,10 @@ public class Car extends LandVehicle {
         this.doorsClosed = true;
     }
 
+    public boolean areDoorsClosed() {
+        return this.doorsClosed;
+    }
+
     @Override
     public void startUp() {
         if (!this.doorsClosed) {
@@ -82,5 +87,6 @@ public class Car extends LandVehicle {
             System.out.println("Doors were closed and The car is started up");
         }
     }
+
 
 }

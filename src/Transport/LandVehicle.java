@@ -3,7 +3,7 @@ package Transport;
 import java.util.ArrayList;
 
 abstract class LandVehicle extends Vehicle{
-    private int wheels;
+    protected int wheels;
     private ArrayList<String> suitableTerrain;
     public LandVehicle() {
         super();
