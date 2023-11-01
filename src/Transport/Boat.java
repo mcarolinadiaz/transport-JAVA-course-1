@@ -1,5 +1,7 @@
 package Transport;
 
+import java.util.Objects;
+
 public class Boat extends WaterVehicle {
     private int anchors;
     private boolean anchored;
@@ -68,5 +70,37 @@ public class Boat extends WaterVehicle {
             this.raiseAnchors();
         }
         System.out.println("The anchors have been raised and the boat is underway");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if ((o == null) || (o.getClass().equals(this.getClass()))) {
+            return false;
+        }
+        Boat b = (Boat) o;
+        return this.getAnchors() == b.getAnchors() && this.getLength() == b.getLength() &&
+                this.getModel().equals(b.getModel()) && this.getYear() == b.getYear() &&
+                this.propulsion.equals(b.getPropulsion());
+
+    }
+
+    @Override
+    public String toString() {
+        return "Boat{" + '\'' +
+                "model=" + this.getModel() + '\'' +
+                "year=" + this.getYear() + '\'' +
+                "propulsion=" + this.getPropulsion() + '\'' +
+                "anchors=" + this.getAnchors() + '\'' +
+                "length=" + this.getLength() + '\'' +
+                "}";
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getLength(), this.getAnchors(), this.getYear(), this.getModel(),
+                this.getYear(), this.getPropulsion());
     }
 }

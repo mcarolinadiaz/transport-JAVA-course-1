@@ -1,5 +1,7 @@
 package Transport;
 
+import java.util.Objects;
+
 public class Submarine extends WaterVehicle {
     private int depth;
     private boolean isSubmerge;
@@ -59,6 +61,10 @@ public class Submarine extends WaterVehicle {
         super.setPropulsion(propulsion);
     }
 
+    public boolean isSubmerge() {
+        return this.isSubmerge;
+    }
+
     @Override
     public void startUp() {
         if (!isSubmerge) {
@@ -68,5 +74,38 @@ public class Submarine extends WaterVehicle {
             this.submerge();
             System.out.println("The plane has already submerged and is sailing!");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if ((o == null) || (o.getClass().equals(this.getClass()))) {
+            return false;
+        }
+        Submarine s = (Submarine) o;
+        return this.getDepth() == s.getDepth() && this.getLength() == s.getLength() &&
+                this.getModel().equals(s.getModel()) && this.getYear() == s.getYear() &&
+                this.propulsion.equals(s.getPropulsion()) && this.isSubmerge == s.isSubmerge();
+
+    }
+
+    @Override
+    public String toString() {
+        return "Submarine{" + '\'' +
+                "model=" + this.getModel() + '\'' +
+                "year=" + this.getYear() + '\'' +
+                "propulsion=" + this.getPropulsion() + '\'' +
+                "depth=" + this.getDepth() + '\'' +
+                "length=" + this.getLength() + '\'' +
+                "isSubmerge=" + this.isSubmerge() + '\'' +
+                "}";
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getLength(), this.getDepth(), this.getYear(), this.getModel(),
+                this.getYear(), this.getPropulsion(), this.isSubmerge());
     }
 }

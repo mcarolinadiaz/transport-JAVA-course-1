@@ -1,7 +1,7 @@
 package Transport;
 
 abstract class WaterVehicle extends Vehicle {
-    private int length;
+    protected int length;
     public WaterVehicle() {
         super();
         this.length = 20000;

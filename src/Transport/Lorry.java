@@ -1,6 +1,7 @@
 package Transport;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Lorry extends LandVehicle {
     private int load;
@@ -65,4 +66,5 @@ public class Lorry extends LandVehicle {
     public void startUp() {
         System.out.println("The lorry is started up");
     }
+
 }

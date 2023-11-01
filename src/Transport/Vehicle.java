@@ -1,9 +1,9 @@
 package Transport;
 
 abstract class Vehicle {
-    private String model;
-    private int year;
-    private String propulsion;
+    protected String model;
+    protected int year;
+    protected String propulsion;
     public Vehicle() {
         this.model = "";
         this.year = 2023;
@@ -40,4 +40,5 @@ abstract class Vehicle {
     }
 
     public abstract void startUp();
+
 }

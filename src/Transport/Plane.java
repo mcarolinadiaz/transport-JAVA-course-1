@@ -1,19 +1,18 @@
 package Transport;
 
+import java.util.Objects;
+
 public class Plane extends AirVehicle {
     private int availableSeats;
-    private String[] passengers;
     private boolean flying;
     public Plane() {
         super();
         this.availableSeats = 40;
-        this.passengers = new String[this.availableSeats];
         this.flying = false;
     }
     public Plane(String model, int year, String propulsion, int availableSeats, boolean flying) {
         super(model, year, propulsion, flying);
         this.availableSeats = availableSeats;
-        this.passengers = new String[this.availableSeats];
         this.flying = true;
     }
 
@@ -58,6 +57,10 @@ public class Plane extends AirVehicle {
         super.setPropulsion(propulsion);
     }
 
+    public boolean isFlying() {
+        return this.flying;
+    }
+
     @Override
     public void startUp() {
         if (!this.flying) {
@@ -66,6 +69,38 @@ public class Plane extends AirVehicle {
         else {
             System.out.println("The plane has already took off and is flying!");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if ((o == null) || (o.getClass().equals(this.getClass()))) {
+            return false;
+        }
+        Plane p = (Plane) o;
+        return this.getAvailableSeats() == p.getAvailableSeats() && this.flying == p.isFlying() &&
+                this.getModel().equals(p.getModel()) && this.getYear() == p.getYear() &&
+                this.propulsion.equals(p.getPropulsion());
+
+    }
+
+    @Override
+    public String toString() {
+        return "Plane{" + '\'' +
+                "model=" + this.getModel() + '\'' +
+                "year=" + this.getYear() + '\'' +
+                "propulsion=" + this.getPropulsion() + '\'' +
+                "availableSeats=" + this.getAvailableSeats() + '\'' +
+                "flying=" + this.isFlying() + '\'' +
+                "}";
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getAvailableSeats(), this.isFlying(), this.getYear(), this.getModel(),
+                this.getYear(), this.getPropulsion());
     }
 
 
