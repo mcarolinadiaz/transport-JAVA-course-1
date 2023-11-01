@@ -6,6 +6,7 @@ import java.util.ArrayList;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
+        /*
         Vehicle vehicle = new Vehicle();
         WaterVehicle waterVehicle = new WaterVehicle();
         Submarine submarine = new Submarine();
@@ -30,5 +31,6 @@ public class Main {
 
         System.out.println(vehicle.getPropulsion());
         System.out.println(customVehicle.getPropulsion());
+        */
     }
 }

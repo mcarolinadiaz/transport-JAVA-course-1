@@ -40,4 +40,9 @@ public class AirVehicle extends Vehicle {
     public void setPropulsion(String propulsion) {
         super.setPropulsion(propulsion);
     }
+
+    @Override
+    public void startUp() {
+        System.out.println("The plane is started up");
+    }
 }
