@@ -2,7 +2,7 @@ package Transport;
 
 import java.util.Objects;
 
-public class Plane extends AirVehicle {
+public class Plane extends AirVehicle implements IEmbark {
     private int availableSeats;
     private boolean flying;
     public Plane() {
@@ -104,4 +104,22 @@ public class Plane extends AirVehicle {
     }
 
 
+    @Override
+    public void embarkPassengers() {
+        if (isFlying()) {
+            System.out.println("The plane is flying now!");
+        } else {
+            System.out.println("Embarking...");
+        }
+
+    }
+
+    @Override
+    public void disembarkPassengers() {
+        if (isFlying()) {
+            System.out.println("The plane is flying now!");
+        } else {
+            System.out.println("Embarking...");
+        }
+    }
 }
