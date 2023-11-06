@@ -35,4 +35,9 @@ abstract class AirVehicle extends Vehicle {
     }
 
     public abstract void startUp();
+
+    @Override
+    public String toString() {
+        return "AirVehicle{";
+    }
 }

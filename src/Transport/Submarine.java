@@ -87,7 +87,7 @@ public class Submarine extends WaterVehicle {
         Submarine s = (Submarine) o;
         return this.getDepth() == s.getDepth() && this.getLength() == s.getLength() &&
                 this.getModel().equals(s.getModel()) && this.getYear() == s.getYear() &&
-                this.propulsion.equals(s.getPropulsion()) && this.isSubmerge == s.isSubmerge();
+                this.getPropulsion().equals(s.getPropulsion()) && this.isSubmerge() == s.isSubmerge();
 
     }
 
