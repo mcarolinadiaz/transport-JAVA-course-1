@@ -3,7 +3,7 @@ package Transport;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Lorry extends LandVehicle {
+public class Lorry extends LandVehicle implements IShipment {
     private int load;
     public Lorry() {
         super();
@@ -67,4 +67,13 @@ public class Lorry extends LandVehicle {
         System.out.println("The lorry is started up");
     }
 
+    @Override
+    public void load() {
+
+    }
+
+    @Override
+    public void unload() {
+
+    }
 }

@@ -3,18 +3,25 @@ package Transport;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Car extends LandVehicle {
+public class Car extends LandVehicle implements IElectricTransport {
     private int doors;
     private boolean doorsClosed;
+    private boolean lowBattery;
     public Car() {
         super();
         this.doors = 4;
         this.doorsClosed = false;
+        this.lowBattery = true;
     }
     public Car(String model, int year, String propulsion, int wheels, ArrayList<String> suitableTerrain, int doors) {
         super(model, year, propulsion, wheels, suitableTerrain);
         this.doors = doors;
         this.doorsClosed = false;
+        this.lowBattery = true;
+    }
+
+    public boolean getLowBattery() {
+        return this.lowBattery;
     }
 
     public int getDoors() {
@@ -89,4 +96,8 @@ public class Car extends LandVehicle {
     }
 
 
+    @Override
+    public void chargeEnergy() {
+        this.lowBattery = false;
+    }
 }

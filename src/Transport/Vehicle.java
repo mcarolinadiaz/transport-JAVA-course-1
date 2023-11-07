@@ -41,7 +41,5 @@ abstract class Vehicle {
 
     public abstract void startUp();
 
-    @Override
-    public abstract String toString();
 
 }

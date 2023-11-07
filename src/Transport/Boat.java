@@ -2,7 +2,7 @@ package Transport;
 
 import java.util.Objects;
 
-public class Boat extends WaterVehicle {
+public class Boat extends WaterVehicle implements IEmbark, IShipment {
     private int anchors;
     private boolean anchored;
     public Boat() {
@@ -102,5 +102,37 @@ public class Boat extends WaterVehicle {
     public int hashCode() {
         return Objects.hash(this.getLength(), this.getAnchors(), this.getYear(), this.getModel(),
                 this.getYear(), this.getPropulsion());
+    }
+
+    @Override
+    public void embarkPassengers() {
+        if(!this.anchored) {
+            System.out.println("The boat ");
+        }
+        else {
+            this.anchored();
+            System.out.println("The boat");
+        }
+    }
+
+    @Override
+    public void disembarkPassengers() {
+        if(!this.anchored) {
+            System.out.println("The boat ");
+        }
+        else {
+            this.anchored();
+            System.out.println("The boat");
+        }
+    }
+
+    @Override
+    public void load() {
+
+    }
+
+    @Override
+    public void unload() {
+
     }
 }

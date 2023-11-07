@@ -2,7 +2,7 @@ package Transport;
 
 import java.util.ArrayList;
 
-public class Bus extends LandVehicle {
+public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
     private int availableSeats;
     public Bus() {
         super();
@@ -64,5 +64,30 @@ public class Bus extends LandVehicle {
     @Override
     public void startUp() {
         System.out.println("The bus is started up");
+    }
+
+    @Override
+    public String toString() {
+        return "Bus{" + '\'' +
+                "model=" + this.getModel() + '\'' +
+                "year=" + this.getYear() + '\'' +
+                "propulsion=" + this.getPropulsion() + '\'' +
+                "availableSeats=" + this.getAvailableSeats() + '\'' +
+                "}";
+    }
+
+    @Override
+    public void collectFees() {
+        System.out.println("Collecting fees...");
+    }
+
+    @Override
+    public void embarkPassengers() {
+        System.out.println("");
+    }
+
+    @Override
+    public void disembarkPassengers() {
+        System.out.println("");
     }
 }
