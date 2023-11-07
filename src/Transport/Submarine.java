@@ -5,14 +5,15 @@ import java.util.Objects;
 public class Submarine extends WaterVehicle {
     private int depth;
     private boolean isSubmerge;
+    private static final int MAXDEPTH = 40000;
     public Submarine() {
         super();
-        this.depth = 20000;
+        this.depth = 0;
         this.isSubmerge = false;
     }
     public Submarine(String model, int year, String propulsion, int length, int depth) {
         super(model, year, propulsion, length);
-        this.depth = depth;
+        this.setDepth(depth);
         this.isSubmerge = false;
     }
 
@@ -21,7 +22,9 @@ public class Submarine extends WaterVehicle {
     }
 
     public void setDepth(int depth) {
-        this.depth = depth;
+        if (MAXDEPTH > depth) {
+            this.depth = depth;
+        }
     }
     public void submerge() {
         this.startUp();
@@ -104,8 +107,8 @@ public class Submarine extends WaterVehicle {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return Objects.hash(this.getLength(), this.getDepth(), this.getYear(), this.getModel(),
-                this.getYear(), this.getPropulsion(), this.isSubmerge());
+                this.getYear(), this.getPropulsion(), this.isSubmerge(), MAXDEPTH);
     }
 }

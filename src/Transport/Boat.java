@@ -99,7 +99,7 @@ public class Boat extends WaterVehicle implements IShipment {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return Objects.hash(this.getLength(), this.getAnchors(), this.getYear(), this.getModel(),
                 this.getYear(), this.getPropulsion());
     }

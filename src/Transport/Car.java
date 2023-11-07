@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public final class Car extends LandVehicle implements IElectricTransport {
-    private int doors;
+    private final int doors;
     private boolean doorsClosed;
     private boolean lowBattery;
     public Car() {
@@ -26,10 +26,6 @@ public final class Car extends LandVehicle implements IElectricTransport {
 
     public int getDoors() {
         return doors;
-    }
-
-    public void setDoors(int doors) {
-        this.doors = doors;
     }
 
     public int getWheels() {

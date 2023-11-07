@@ -98,7 +98,7 @@ public class Plane extends AirVehicle implements IEmbark {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return Objects.hash(this.getAvailableSeats(), this.isFlying(), this.getYear(), this.getModel(),
                 this.getYear(), this.getPropulsion());
     }
