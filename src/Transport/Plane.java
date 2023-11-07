@@ -105,21 +105,27 @@ public class Plane extends AirVehicle implements IEmbark {
 
 
     @Override
-    public void embarkPassengers() {
+    public void embarkPassengers(int passengers) {
         if (isFlying()) {
             System.out.println("The plane is flying now!");
         } else {
-            System.out.println("Embarking...");
+            if (this.getAvailableSeats() >= passengers) {
+                System.out.println("Embarking...");
+                this.setAvailableSeats(this.getAvailableSeats() - passengers);
+            } else {
+                System.out.println("It doesn't have enough available seats for "+ passengers + "people");
+            }
         }
 
     }
 
     @Override
-    public void disembarkPassengers() {
+    public void disembarkPassengers(int passengers) {
         if (isFlying()) {
             System.out.println("The plane is flying now!");
         } else {
             System.out.println("Embarking...");
+            this.setAvailableSeats(this.getAvailableSeats() + passengers);
         }
     }
 }

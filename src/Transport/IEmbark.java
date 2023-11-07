@@ -1,6 +1,6 @@
 package Transport;
 
 public interface IEmbark {
-    public abstract void embarkPassengers();
-    public abstract void disembarkPassengers();
+    public abstract void embarkPassengers(int passengers);
+    public abstract void disembarkPassengers(int passengers);
 }

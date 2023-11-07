@@ -77,17 +77,24 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
     }
 
     @Override
-    public void collectFees() {
+    public void collectFees(int fee) {
         System.out.println("Collecting fees...");
     }
 
     @Override
-    public void embarkPassengers() {
-        System.out.println("");
+    public void embarkPassengers(int passengers) {
+        if (this.getAvailableSeats() >= passengers) {
+            System.out.println("Embarking...");
+            this.setAvailableSeats(this.getAvailableSeats() - passengers);
+        } else {
+            System.out.println("It doesn't have enough available seats for "+ passengers + "people");
+        }
+
     }
 
     @Override
-    public void disembarkPassengers() {
-        System.out.println("");
+    public void disembarkPassengers(int passengers) {
+        System.out.println("Disembarking...");
+        this.setAvailableSeats(this.getAvailableSeats() + passengers);
     }
 }

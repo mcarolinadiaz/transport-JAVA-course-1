@@ -5,13 +5,19 @@ import java.util.Objects;
 
 public class Lorry extends LandVehicle implements IShipment {
     private int load;
+    private int capacity;
+    private boolean driving;
     public Lorry() {
         super();
         this.load = 0;
+        this.capacity = 40;
+        this.driving = false;
     }
-    public Lorry(String model, int year, String propulsion, int wheels, ArrayList<String> suitableTerrain, int load) {
+    public Lorry(String model, int year, String propulsion, int wheels, ArrayList<String> suitableTerrain, int load, int capacity) {
         super(model, year, propulsion, wheels, suitableTerrain);
         this.load = load;
+        this.capacity = capacity;
+        this.driving = false;
     }
 
     public int getLoad() {
@@ -64,16 +70,29 @@ public class Lorry extends LandVehicle implements IShipment {
 
     @Override
     public void startUp() {
+        this.driving = true;
         System.out.println("The lorry is started up");
+    }
+
+    public void brake() {
+        this.driving = false;
     }
 
     @Override
     public void load() {
-
+        if (this.driving) {
+            System.out.println("The lorry is driving now!");
+        } else {
+            System.out.println("Loading...");
+        }
     }
 
     @Override
     public void unload() {
-
+        if (this.driving) {
+            System.out.println("The lorry is driving now!");
+        } else {
+            System.out.println("Unloading...");
+        }
     }
 }

@@ -1,6 +1,6 @@
 package Transport;
 
 public interface IPublicTransport {
-    public abstract void collectFees();
+    public abstract void collectFees(int fee);
 
 }

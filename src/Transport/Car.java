@@ -3,7 +3,7 @@ package Transport;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Car extends LandVehicle implements IElectricTransport {
+public final class Car extends LandVehicle implements IElectricTransport {
     private int doors;
     private boolean doorsClosed;
     private boolean lowBattery;
