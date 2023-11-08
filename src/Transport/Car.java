@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public final class Car extends LandVehicle implements IElectricTransport {
+    // properties
     private final int doors;
     private boolean doorsClosed;
     private boolean lowBattery;
+    // Default constructor
     public Car() {
         super();
         this.doors = 4;
@@ -20,6 +22,7 @@ public final class Car extends LandVehicle implements IElectricTransport {
         this.lowBattery = true;
     }
 
+    // Getters & Setters
     public boolean getLowBattery() {
         return this.lowBattery;
     }

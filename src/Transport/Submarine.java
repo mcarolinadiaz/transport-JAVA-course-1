@@ -107,7 +107,7 @@ public class Submarine extends WaterVehicle {
     }
 
     @Override
-    public final int hashCode() {
+    public int hashCode() {
         return Objects.hash(this.getLength(), this.getDepth(), this.getYear(), this.getModel(),
                 this.getYear(), this.getPropulsion(), this.isSubmerge(), MAXDEPTH);
     }
