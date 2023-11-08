@@ -1,15 +1,21 @@
 package Transport;
 
+// Abstract class representing a generic air vehicle that is kind of a vehicle in the Transport hierarchy.
+// This class encapsulates common behaviors shared by all kind of air vehicles.
 abstract class AirVehicle extends Vehicle {
+    //Default constructor
+
     public AirVehicle() {
         super();
     }
+    //Custom consctructor
     public AirVehicle(String model, int year, String propulsion, boolean flying) {
         super(model, year, propulsion);
     }
     public abstract void takeOff();
     public abstract void land();
 
+    // Getters and Setters
     public String getModel() {
         return super.getModel();
     }
@@ -36,8 +42,4 @@ abstract class AirVehicle extends Vehicle {
 
     public abstract void startUp();
 
-    @Override
-    public String toString() {
-        return "AirVehicle{";
-    }
 }

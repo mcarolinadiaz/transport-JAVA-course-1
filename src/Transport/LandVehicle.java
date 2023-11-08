@@ -2,19 +2,24 @@ package Transport;
 
 import java.util.ArrayList;
 
+// Abstract class representing a generic land vehicle that is kind of a vehicle in the Transport hierarchy.
+// This class encapsulates common properties and behaviors shared by all kind of land vehicles.
 abstract class LandVehicle extends Vehicle{
-    protected int wheels;
-    private ArrayList<String> suitableTerrain;
+    protected int wheels;                       // Wheels of the land vehicle
+    private ArrayList<String> suitableTerrain;  // List of suitable terrain for the land vehicle
+    // Default constructor
     public LandVehicle() {
         super();
         this.wheels = 4;
     }
+    // Custom constructor
     public LandVehicle(String model, int year, String propulsion, int wheels, ArrayList<String> suitableTerrain) {
         super(model, year, propulsion);
         this.wheels = wheels;
         this.suitableTerrain = new ArrayList<String>();
         this.setSuitableTerrain(suitableTerrain);
     }
+    // Getters and setters
 
     public int getWheels() {
         return wheels;

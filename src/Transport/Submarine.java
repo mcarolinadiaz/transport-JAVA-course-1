@@ -22,7 +22,8 @@ public class Submarine extends WaterVehicle {
     }
 
     public void setDepth(int depth) {
-        if (MAXDEPTH > depth) {
+        if (isAvailableDepth(depth)) {
+            this.submerge();
             this.depth = depth;
         }
     }
@@ -110,5 +111,9 @@ public class Submarine extends WaterVehicle {
     public int hashCode() {
         return Objects.hash(this.getLength(), this.getDepth(), this.getYear(), this.getModel(),
                 this.getYear(), this.getPropulsion(), this.isSubmerge(), MAXDEPTH);
+    }
+    // Static boolean function that verify if the submarine is available to submerge
+    public static boolean isAvailableDepth(int depth) {
+        return (MAXDEPTH > depth);
     }
 }
