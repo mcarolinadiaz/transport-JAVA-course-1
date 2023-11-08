@@ -24,5 +24,7 @@ public class Main {
         System.out.println(lorry.getPropulsion());
         System.out.println(plane.toString());
 
+
+
     }
 }

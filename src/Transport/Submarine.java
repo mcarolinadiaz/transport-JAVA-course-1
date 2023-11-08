@@ -5,17 +5,24 @@ import java.util.Objects;
 public class Submarine extends WaterVehicle {
     private int depth;
     private boolean isSubmerge;
-    private static final int MAXDEPTH = 40000;
+    private static final int MAXDEPTH = 40000; // Static and final MAX depth propertie
+    // Static block
+    static {
+        System.out.println("The max depth level is 40000");
+    }
+    // Default constructor
     public Submarine() {
         super();
         this.depth = 0;
         this.isSubmerge = false;
     }
+    // Custom constructor
     public Submarine(String model, int year, String propulsion, int length, int depth) {
         super(model, year, propulsion, length);
         this.setDepth(depth);
         this.isSubmerge = false;
     }
+    // Getters and setters
 
     public int getDepth() {
         return depth;
@@ -114,6 +121,6 @@ public class Submarine extends WaterVehicle {
     }
     // Static boolean function that verify if the submarine is available to submerge
     public static boolean isAvailableDepth(int depth) {
-        return (MAXDEPTH > depth);
+        return MAXDEPTH > depth;
     }
 }
