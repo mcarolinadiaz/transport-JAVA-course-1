@@ -1,21 +1,23 @@
 package Transport;
 
 import java.util.Objects;
-
+// Boat class representing a water vehicle.
 public class Boat extends WaterVehicle implements IShipment {
     private int anchors;
     private boolean anchored;
+    // Default constructor initializes anchors to 4 and sets the boat as anchored.
     public Boat() {
         super();
         this.anchors = 4;
         this.anchored = true;
     }
+    // Custom constructor with additional parameters for anchors and initializes the boat as anchored.
     public Boat(String model, int year, String propulsion, int length, int anchors) {
         super(model, year, propulsion, length);
         this.anchors = anchors;
         this.anchored = true;
     }
-
+    // Getters and Setters
     public int getAnchors() {
         return anchors;
     }
@@ -64,6 +66,7 @@ public class Boat extends WaterVehicle implements IShipment {
         super.setPropulsion(propulsion);
     }
 
+    // Overridden methods from the parent class and interfaces are implemented here.
     @Override
     public void startUp() {
         if (this.anchored) {
@@ -71,7 +74,7 @@ public class Boat extends WaterVehicle implements IShipment {
         }
         System.out.println("The anchors have been raised and the boat is underway");
     }
-
+    // Custom equals method to compare Boat objects based on their attributes.
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -86,7 +89,7 @@ public class Boat extends WaterVehicle implements IShipment {
                 this.propulsion.equals(b.getPropulsion());
 
     }
-
+    // Custom toString method to provide a string representation of the Boat object.
     @Override
     public String toString() {
         return "Boat{" + '\'' +
@@ -97,13 +100,14 @@ public class Boat extends WaterVehicle implements IShipment {
                 "length=" + this.getLength() + '\'' +
                 "}";
     }
-
+    // Custom hashCode method to generate a hash code for Boat objects.
     @Override
     public final int hashCode() {
         return Objects.hash(this.getLength(), this.getAnchors(), this.getYear(), this.getModel(),
                 this.getYear(), this.getPropulsion());
     }
 
+    // Method to load cargo onto the boat. Checks if the boat is anchored before loading.
     @Override
     public void load() {
         if (!this.anchored) {
