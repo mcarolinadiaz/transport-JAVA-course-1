@@ -1,14 +1,12 @@
 package Transport;
 
-import java.util.Arrays;
-
 // Abstract class representing a generic vehicle in the Transport hierarchy.
 // This class encapsulates common properties and behaviors shared by all vehicles.
 abstract class Vehicle {
     protected String model;         // Model of the vehicle
     protected int year;             // Year of the vehicle
     protected String propulsion;    // Type of propulsion (e.g., petrol, jet fuel)
-    protected static final String[] PROPULSIONS = {"petrol", "jet fuel", "gas oil"};
+    protected static final String[] PROPULSION = {"petrol", "jet fuel", "gas oil"};
     // Default constructor initializes instance variables with default values.
     public Vehicle() {
         this.model = "";
@@ -28,7 +26,10 @@ abstract class Vehicle {
         return model;
     }
 
-    public void setModel(String model) {
+    public void setModel(String model) throws InvalidModelException {
+        if (model == null) {
+            throw new InvalidModelException("Model name is null.");
+        }
         this.model = model;
     }
 
@@ -46,7 +47,7 @@ abstract class Vehicle {
 
     public void setPropulsion(String propulsion) throws InvalidPropulsion {
         boolean match = false;
-        for (String p : PROPULSIONS) {
+        for (String p : PROPULSION) {
             if (p.contains(propulsion)) {
                 match = true;
                 break;
