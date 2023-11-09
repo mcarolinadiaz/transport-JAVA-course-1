@@ -3,7 +3,7 @@ package Transport;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public final class Car extends LandVehicle implements IElectricTransport {
+public final class Car extends LandVehicle implements IElectricTransport, AutoCloseable {
     // properties
     private final int doors;
     private boolean doorsClosed;
@@ -98,5 +98,10 @@ public final class Car extends LandVehicle implements IElectricTransport {
     @Override
     public void chargeEnergy() {
         this.lowBattery = false;
+    }
+
+    @Override
+    public void close() throws NotClosedException {
+        throw new NotClosedException("Car wasn't closed");
     }
 }

@@ -35,11 +35,7 @@ abstract class LandVehicle extends Vehicle{
     }
 
     public ArrayList<String> getSuitableTerrain() {
-        ArrayList<String> result = new ArrayList<>();
-        for (String s : this.suitableTerrain) {
-            result.add(s);
-        }
-        return result;
+        return new ArrayList<>(this.suitableTerrain);
     }
 /*
     public ArrayList<String> getSuitableTerrain() {

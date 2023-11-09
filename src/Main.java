@@ -7,11 +7,15 @@ import Transport.Plane;
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NotClosedException {
         Submarine submarine = new Submarine();
         Plane plane = new Plane();
         Lorry lorry = new Lorry();
-        Car car = new Car();
+        try(Car car = new Car()) {
+            System.out.println(car.getPropulsion());
+        } catch (NotClosedException e) {
+            System.out.println("Exception message: " + e.getMessage());
+        }
 /*
         Submarine customSubmarine = new Submarine("0C", 2022, "petrol", 5000, 50000);
         Plane customPlane = new Plane("0A", 2020, "Jet fuels", 20, false);
@@ -20,9 +24,11 @@ public class Main {
         Bus customBus = new Bus("0Y", 2021, "petrol", 4, new ArrayList<String>(), 10);
         Boat customBoat = new Boat("0R", 2023, "petrol", 5500, 2);
 */
-        System.out.println(car.getPropulsion());
+
         System.out.println(lorry.getPropulsion());
         System.out.println(plane.toString());
+
+
 
 
 
