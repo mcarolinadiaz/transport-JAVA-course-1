@@ -105,18 +105,27 @@ public class Plane extends AirVehicle implements IEmbark {
 
 
     @Override
-    public void embarkPassengers(int passengers) {
-        if (isFlying()) {
-            System.out.println("The plane is flying now!");
-        } else {
-            if (this.getAvailableSeats() >= passengers) {
+    public void embarkPassengers(int passengers) throws NegativeValueException, InvalidValueException, InvalidOperationException {
+        if (passengers < 0) {
+            throw new NegativeValueException("The number of passengers is negative.");
+        } else if (this.getAvailableSeats() < passengers) {
+                throw new InvalidValueException("It doesn't have enough available seats for " + passengers + "people");
+            } else if (this.getAvailableSeats() >= passengers) {
+                this.verifyOperationValid();
                 System.out.println("Embarking...");
                 this.setAvailableSeats(this.getAvailableSeats() - passengers);
-            } else {
-                System.out.println("It doesn't have enough available seats for "+ passengers + "people");
+            }
+    }
+
+    private void verifyOperationValid() throws InvalidOperationException {
+        try {
+            if (isFlying()) {
+                throw new InvalidOperationException("The plane is flying now!");
             }
         }
-
+        catch (InvalidOperationException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     @Override

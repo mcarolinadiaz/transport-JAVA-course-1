@@ -25,8 +25,13 @@ abstract class LandVehicle extends Vehicle{
         return wheels;
     }
 
-    public void setWheels(int wheels) {
-        this.wheels = wheels;
+    public void setWheels(int wheels) throws InvalidValueException{
+        if (wheels < 1) {
+            throw new InvalidValueException("The value of wheels is invalid.");
+        }
+        else {
+            this.wheels = wheels;
+        }
     }
 
     public ArrayList<String> getSuitableTerrain() {
