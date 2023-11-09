@@ -30,3 +30,7 @@ practice-4:
 - Handle exceptions in 2 ways. 
 - Use try-catch with resources.
 - Log messages to the console, file.
+
+practice-5:
+- Add 5 collections to the hierarchy. 
+- Create custom LinkedList with generic.
