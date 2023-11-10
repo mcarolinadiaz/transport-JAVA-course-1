@@ -1,10 +1,14 @@
 package Transport;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
 public final class Car extends LandVehicle implements IElectricTransport, AutoCloseable {
     // properties
+    private static final Logger LOGGER = LogManager.getLogger(Car.class);
     private final int doors;
     private boolean doorsClosed;
     private boolean lowBattery;
@@ -86,11 +90,11 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
     @Override
     public void startUp() {
         if (!this.doorsClosed) {
-            System.out.println("The car is started up");
+            LOGGER.info("The car is started up");
         }
         else {
             this.closeDoors();
-            System.out.println("Doors were closed and The car is started up");
+            LOGGER.info("Doors were closed and The car is started up");
         }
     }
 
@@ -102,6 +106,6 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
 
     @Override
     public void close() throws NotClosedException {
-        throw new NotClosedException("Car wasn't closed");
+        throw new NotClosedException("Car was closed");
     }
 }

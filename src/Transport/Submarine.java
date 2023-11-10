@@ -1,8 +1,12 @@
 package Transport;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Objects;
 
 public class Submarine extends WaterVehicle {
+    private static final Logger LOGGER = LogManager.getLogger(Submarine.class);
     private int depth;
     private boolean isSubmerge;
     private static final int MAXDEPTH = 40000; // Static and final MAX depth propertie
@@ -37,7 +41,7 @@ public class Submarine extends WaterVehicle {
     public void submerge() {
         this.startUp();
         this.isSubmerge = true;
-        System.out.println("The submarine has been submerged");
+        LOGGER.info("The submarine has been submerged");
     }
 
     public int getLength() {
@@ -79,11 +83,11 @@ public class Submarine extends WaterVehicle {
     @Override
     public void startUp() {
         if (!isSubmerge) {
-            System.out.println("The submarine is started up");
+            LOGGER.info("The submarine is started up");
         }
         else {
             this.submerge();
-            System.out.println("The plane has already submerged and is sailing!");
+            LOGGER.warn("The plane has already submerged and is sailing!");
         }
     }
 

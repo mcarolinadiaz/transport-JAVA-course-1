@@ -1,9 +1,13 @@
 package Transport;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class Lorry extends LandVehicle implements IShipment {
+    private static final Logger LOGGER = LogManager.getLogger(Lorry.class);
     private int load;
     private int capacity;
     private boolean driving;
@@ -71,7 +75,7 @@ public class Lorry extends LandVehicle implements IShipment {
     @Override
     public void startUp() {
         this.driving = true;
-        System.out.println("The lorry is started up");
+        LOGGER.info("The lorry is started up");
     }
 
     public void brake() {
@@ -81,18 +85,18 @@ public class Lorry extends LandVehicle implements IShipment {
     @Override
     public void load() {
         if (this.driving) {
-            System.out.println("The lorry is driving now!");
+            LOGGER.warn("The lorry is driving now!");
         } else {
-            System.out.println("Loading...");
+            LOGGER.info("Loading...");
         }
     }
 
     @Override
     public void unload() {
         if (this.driving) {
-            System.out.println("The lorry is driving now!");
+            LOGGER.warn("The lorry is driving now!");
         } else {
-            System.out.println("Unloading...");
+            LOGGER.info("Unloading...");
         }
     }
 }

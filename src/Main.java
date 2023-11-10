@@ -2,20 +2,37 @@ import Transport.*;
 import Transport.Lorry;
 import Transport.Car;
 import Transport.Plane;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
+    static {
+        System.setProperty("log4j.configurationFile", "log4j2.xml");
+    }
+    private static final Logger LOGGER = LogManager.getLogger(Main.class);
     public static void main(String[] args) throws NotClosedException {
         Submarine submarine = new Submarine();
         Plane plane = new Plane();
         Lorry lorry = new Lorry();
+        Boat boat = new Boat();
         try(Car car = new Car()) {
             System.out.println(car.getPropulsion());
         } catch (NotClosedException e) {
             System.out.println("Exception message: " + e.getMessage());
         }
+        boat.load();
+        boat.raiseAnchors();
+        boat.load();
+        LOGGER.info("Hello!");
+        plane.startUp();
+        plane.takeOff();
+        plane.disembarkPassengers(4);
+
+
 /*
         Submarine customSubmarine = new Submarine("0C", 2022, "petrol", 5000, 50000);
         Plane customPlane = new Plane("0A", 2020, "Jet fuels", 20, false);

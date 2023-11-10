@@ -1,8 +1,12 @@
 package Transport;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Objects;
 // Boat class representing a water vehicle.
 public class Boat extends WaterVehicle implements IShipment {
+    private static final Logger LOGGER = LogManager.getLogger(Boat.class);
     private int anchors;
     private boolean anchored;
     // Default constructor initializes anchors to 4 and sets the boat as anchored.
@@ -72,7 +76,7 @@ public class Boat extends WaterVehicle implements IShipment {
         if (this.anchored) {
             this.raiseAnchors();
         }
-        System.out.println("The anchors have been raised and the boat is underway");
+        LOGGER.info("The anchors have been raised and the boat is underway");
     }
     // Custom equals method to compare Boat objects based on their attributes.
     @Override
@@ -111,9 +115,9 @@ public class Boat extends WaterVehicle implements IShipment {
     @Override
     public void load() {
         if (!this.anchored) {
-            System.out.println("The boat needs to anchor!");
+            LOGGER.warn("The boat needs to anchor!");
         } else {
-            System.out.println("Loading...");
+            LOGGER.info("Loading...");
         }
     }
 

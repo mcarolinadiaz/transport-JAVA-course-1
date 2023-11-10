@@ -1,8 +1,12 @@
 package Transport;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Objects;
 
 public class Plane extends AirVehicle implements IEmbark {
+    private static final Logger LOGGER = LogManager.getLogger(Plane.class);
     private int availableSeats;
     private boolean flying;
     public Plane() {
@@ -27,7 +31,7 @@ public class Plane extends AirVehicle implements IEmbark {
     public void takeOff() {
         this.startUp();
         this.flying = true;
-        System.out.println("The plane is flying");
+        LOGGER.info("The plane is flying");
     }
     public void land() {
         this.flying = false;
@@ -64,10 +68,10 @@ public class Plane extends AirVehicle implements IEmbark {
     @Override
     public void startUp() {
         if (!this.flying) {
-            System.out.println("The plane is started up");
+            LOGGER.error("The plane is started up");
         }
         else {
-            System.out.println("The plane has already took off and is flying!");
+            LOGGER.info("The plane has already took off and is flying!");
         }
     }
 
@@ -107,12 +111,14 @@ public class Plane extends AirVehicle implements IEmbark {
     @Override
     public void embarkPassengers(int passengers) throws NegativeValueException, InvalidValueException, InvalidOperationException {
         if (passengers < 0) {
+            LOGGER.error("The number of passengers is negative.");
             throw new NegativeValueException("The number of passengers is negative.");
         } else if (this.getAvailableSeats() < passengers) {
+                LOGGER.error("It doesn't have enough available seats for " + passengers + "people");
                 throw new InvalidValueException("It doesn't have enough available seats for " + passengers + "people");
             } else if (this.getAvailableSeats() >= passengers) {
                 this.verifyOperationValid();
-                System.out.println("Embarking...");
+                LOGGER.info("Embarking...");
                 this.setAvailableSeats(this.getAvailableSeats() - passengers);
             }
     }
@@ -124,16 +130,16 @@ public class Plane extends AirVehicle implements IEmbark {
             }
         }
         catch (InvalidOperationException e) {
-            System.out.println("Error: " + e.getMessage());
+            LOGGER.error("Error: " + e.getMessage());
         }
     }
 
     @Override
     public void disembarkPassengers(int passengers) {
         if (isFlying()) {
-            System.out.println("The plane is flying now!");
+            LOGGER.error("The plane is flying now!");
         } else {
-            System.out.println("Embarking...");
+            LOGGER.info("Embarking...");
             this.setAvailableSeats(this.getAvailableSeats() + passengers);
         }
     }
