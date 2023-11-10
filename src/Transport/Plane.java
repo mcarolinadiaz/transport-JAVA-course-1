@@ -68,10 +68,10 @@ public class Plane extends AirVehicle implements IEmbark {
     @Override
     public void startUp() {
         if (!this.flying) {
-            LOGGER.error("The plane is started up");
+            LOGGER.info("The plane is started up");
         }
         else {
-            LOGGER.info("The plane has already took off and is flying!");
+            LOGGER.error("The plane has already took off and is flying!");
         }
     }
 
@@ -117,30 +117,32 @@ public class Plane extends AirVehicle implements IEmbark {
                 LOGGER.error("It doesn't have enough available seats for " + passengers + "people");
                 throw new InvalidValueException("It doesn't have enough available seats for " + passengers + "people");
             } else if (this.getAvailableSeats() >= passengers) {
-                this.verifyOperationValid();
-                LOGGER.info("Embarking...");
-                this.setAvailableSeats(this.getAvailableSeats() - passengers);
+                try {
+                    if (isFlying()) {
+                        throw new InvalidOperationException("The plane is flying now!");
+                    } else {
+                        LOGGER.info("Embarking...");
+                        this.setAvailableSeats(this.getAvailableSeats() - passengers);
+                    }
+                }
+                catch (InvalidOperationException e) {
+                    LOGGER.error("Error: " + e.getMessage());
+                }
             }
     }
 
-    private void verifyOperationValid() throws InvalidOperationException {
+    @Override
+    public void disembarkPassengers(int passengers) throws InvalidOperationException {
         try {
             if (isFlying()) {
-                throw new InvalidOperationException("The plane is flying now!");
+                throw new InvalidOperationException("The plane is flying now and it is not possible to disembark!");
+            } else {
+                LOGGER.info("Disembarking...");
+                this.setAvailableSeats(this.getAvailableSeats() + passengers);
             }
         }
         catch (InvalidOperationException e) {
             LOGGER.error("Error: " + e.getMessage());
-        }
-    }
-
-    @Override
-    public void disembarkPassengers(int passengers) {
-        if (isFlying()) {
-            LOGGER.error("The plane is flying now!");
-        } else {
-            LOGGER.info("Embarking...");
-            this.setAvailableSeats(this.getAvailableSeats() + passengers);
         }
     }
 }

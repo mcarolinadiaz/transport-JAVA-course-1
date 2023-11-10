@@ -20,9 +20,9 @@ public class Main {
         Lorry lorry = new Lorry();
         Boat boat = new Boat();
         try(Car car = new Car()) {
-            System.out.println(car.getPropulsion());
+            LOGGER.info("Propulsion of: " + car.getPropulsion());
         } catch (NotClosedException e) {
-            System.out.println("Exception message: " + e.getMessage());
+            LOGGER.error("Exception message: " + e.getMessage());
         }
         boat.load();
         boat.raiseAnchors();
@@ -42,8 +42,8 @@ public class Main {
         Boat customBoat = new Boat("0R", 2023, "petrol", 5500, 2);
 */
 
-        System.out.println(lorry.getPropulsion());
-        System.out.println(plane.toString());
+        LOGGER.info(lorry.getPropulsion());
+        LOGGER.info(plane.toString());
 
 
 
