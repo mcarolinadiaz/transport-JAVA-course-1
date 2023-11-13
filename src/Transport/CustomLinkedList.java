@@ -6,20 +6,16 @@ import org.apache.logging.log4j.Logger;
 // Linked list custom
 public class CustomLinkedList<T>{
     private static final Logger LOGGER = LogManager.getLogger(CustomLinkedList.class);
-    private T property;
     private NodeGeneric<T> node = null;
     private class NodeGeneric<T> {
-        private T propertieNode;
-        private int position;
+        private T propertyNode;
         private NodeGeneric<T> following;
         public NodeGeneric() {
-            this.position = 0;
             this.following = null;
         }
 
         public NodeGeneric(NodeGeneric<T> node) {
-            this.propertieNode = node.getPropertyNode();
-            this.position = node.getPosition();
+            this.propertyNode = node.getPropertyNode();
             if (node.getFollowing() != null) {
                 this.following = new NodeGeneric<T>(node.getFollowing());
             } else {
@@ -27,9 +23,8 @@ public class CustomLinkedList<T>{
             }
         }
 
-        public NodeGeneric(T propertieNode, int position, NodeGeneric<T> following) {
-            this.propertieNode = propertieNode;
-            this.position = position;
+        public NodeGeneric(T propertyNode, NodeGeneric<T> following) {
+            this.propertyNode = propertyNode;
             if (following != null) {
                 this.following = new NodeGeneric<T>(following);
             } else {
@@ -37,43 +32,30 @@ public class CustomLinkedList<T>{
             }
         }
 
-        public NodeGeneric(T propertieNode, int position) {
-            this.propertieNode = propertieNode;
-            this.position = position;
-            this.following = null;
-        }
-
-        public NodeGeneric(T propertieNode) {
-            this.propertieNode = propertieNode;
-            this.position = 0;
+        public NodeGeneric(T propertyNode) {
+            this.propertyNode = propertyNode;
             this.following = null;
         }
 
         public void linkNode(NodeGeneric<T> following){
-            if (following != null) {
-                this.following = new NodeGeneric<T>(following);
-            }
-            else {
-                this.following = null;
-            }
+            this.following = following;
         }
         public NodeGeneric<T> getFollowing() {
-            if (this.following != null) {
-                return new NodeGeneric<T>(this.following);
-            }
-            return null;
-        }
-        public void setPosition(int position) {
-            this.position = position;
-        }
-        public int getPosition() {
-            return this.position;
+            return this.following;
         }
         public void setPropertyNode(T propertyNode) {
-            this.propertieNode = propertyNode;
+            this.propertyNode = propertyNode;
         }
         public T getPropertyNode() {
-            return this.propertieNode;
+            return this.propertyNode;
+        }
+
+        @Override
+        public String toString() {
+            return "NodeGeneric{" +
+                    "propertyNode=" + propertyNode +
+                    ", following=" + following +
+                    '}';
         }
     }
     // Constructor
@@ -83,16 +65,15 @@ public class CustomLinkedList<T>{
     // When you need add an element without specific position
     public void add(T element) {
         if (this.node == null) {
-            this.node = new NodeGeneric<T>(element);
-            this.node.setPosition(0);
+            this.node = new NodeGeneric<>(element);
             LOGGER.info("The element "+ element + "was added in the position " + 0 + "- Size list: " + this.size());
         } else {
-            NodeGeneric<T> indexNode =  new NodeGeneric<T>(this.node);
+            NodeGeneric<T> indexNode =  this.node;
             while (indexNode.getFollowing() != null) {
                 indexNode = indexNode.getFollowing();
             }
-            indexNode.linkNode(new NodeGeneric<T>(element, indexNode.getPosition() + 1));
-            LOGGER.info("The element "+ element + " was added in the position " + indexNode.getFollowing().getPosition() + "- Size list: " + this.size());
+            indexNode.linkNode(new NodeGeneric<T>(element));
+            LOGGER.info("The element "+ element + " was added in the position - Size list: " + this.size());
         }
     }
     // Add element with specific position
@@ -100,22 +81,22 @@ public class CustomLinkedList<T>{
         if (this.node == null) {
             this.node = new NodeGeneric<T>(element);
             LOGGER.info("The element "+ element + "was added in the position " + 0 + "- Size list: " + this.size());
-        } else {
-            NodeGeneric<T> newNode = new NodeGeneric<T>(element);
-            NodeGeneric<T> nodeIndex = new NodeGeneric<T>(this.node);
-            while (nodeIndex.getFollowing() != null && nodeIndex.getFollowing().getPosition() < position) {
-                nodeIndex = nodeIndex.getFollowing();
-            }
-            newNode.setPosition(position);
-            if (nodeIndex.getFollowing() != null) {
+        } else if (position == 0) {
+                NodeGeneric<T> newNode = new NodeGeneric<T>(element);
+                newNode.linkNode(this.node);
+                this.node = newNode;
+            } else {
+                int pos = 1;
+                NodeGeneric<T> nodeIndex = this.node;
+                NodeGeneric<T> newNode = new NodeGeneric<T>(element);
+                while (nodeIndex.getFollowing() != null && pos < position) {
+                    pos+=1;
+                    nodeIndex = nodeIndex.getFollowing();
+                }
                 newNode.linkNode(nodeIndex.getFollowing());
+                nodeIndex.linkNode(newNode);
+                LOGGER.info("The element "+ element + " was added in the position " + position + "- Size list: " + this.size());
             }
-            nodeIndex.linkNode(newNode);
-            LOGGER.info("The element "+ element + " was added in the position " + position + "- Size list: " + this.size());
-        }
-    }
-    public T getPropertie() {
-        return this.propertie;
     }
     // To check if list is empty or not.
     public boolean isEmpty() {
@@ -127,9 +108,7 @@ public class CustomLinkedList<T>{
         NodeGeneric<T> nodeIndex = this.node;
         while (nodeIndex != null) {
             result = result + 1;
-            LOGGER.info("Result is: "+ result + "- NodeIndex: " + nodeIndex.getPropertyNode());
             nodeIndex = nodeIndex.getFollowing();
-            LOGGER.info("NodeIndex is: "+ nodeIndex);
         }
         return result;
     }
@@ -162,7 +141,7 @@ public class CustomLinkedList<T>{
             }
         }*//*
         while (nodeIndex != null) {
-            if (nodeIndex.getPropertieNode().equals(element)) {
+            if (nodeIndex.getPropertyNode().equals(element)) {
 
                 return true;
             }
@@ -170,4 +149,11 @@ public class CustomLinkedList<T>{
         }
         return false;
     }*/
+
+    @Override
+    public String toString() {
+        return "CustomLinkedList{" +
+                "node=" + node +
+                '}';
+    }
 }

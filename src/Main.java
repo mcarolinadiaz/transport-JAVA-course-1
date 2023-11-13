@@ -36,8 +36,12 @@ public class Main {
         CustomLinkedList<Integer> list = new CustomLinkedList<>();
         Integer uno = 1;
         Integer dos = 2;
-        list.add(2);
-        list.add(1);
+        list.add(uno);
+        list.add(dos);
+        list.add(3,0);
+        list.add(6,7);
+        list.add(8,1);
+        System.out.println(list);
 
 
 /*
