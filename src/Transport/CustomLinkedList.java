@@ -1,6 +1,7 @@
 package Transport;
 
-public class LinkedList<T>{
+// Linked list custom
+public class CustomLinkedList<T>{
     private final T propertie;
     private NodeGeneric<T> node = null;
     private static class NodeGeneric<T> {
@@ -56,10 +57,10 @@ public class LinkedList<T>{
         }
     }
     // Constructor
-    public LinkedList(T propertie) {
+    public CustomLinkedList(T propertie) {
         this.propertie = propertie;
     }
-
+    // When you need add an element without specific position
     public void add(T element) {
         if (element.getClass() == this.propertie.getClass()) {
             NodeGeneric<T> newNode = new NodeGeneric<T>(element);
@@ -76,7 +77,7 @@ public class LinkedList<T>{
             }
         }
     }
-
+    // Add element with specific position
     public void add(T element, int position) {
         if (element.getClass() == this.propertie.getClass()) {
             NodeGeneric<T> newNode = new NodeGeneric<T>(element);
@@ -100,7 +101,19 @@ public class LinkedList<T>{
     public T getPropertie() {
         return this.propertie;
     }
-    public boolean isEmptly() {
+    public boolean isEmpty() {
         return this.node == null;
     }
+
+    public int size() {
+        int result = 0;
+        NodeGeneric<T> nodeIndex = this.node;
+        while (nodeIndex != null) {
+            nodeIndex = nodeIndex.getFollowing();
+            result += 1;
+        }
+        return result;
+    }
+
+
 }
