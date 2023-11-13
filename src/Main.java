@@ -5,6 +5,7 @@ import Transport.Plane;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
+import java.util.LinkedList;
 
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
@@ -14,7 +15,7 @@ public class Main {
         System.setProperty("log4j.configurationFile", "log4j2.xml");
     }
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
-    public static void main(String[] args) throws NotClosedException {
+    public static void main(String[] args) throws NotClosedException, InvalidOperationException {
         Submarine submarine = new Submarine();
         Plane plane = new Plane();
         Lorry lorry = new Lorry();
@@ -31,6 +32,12 @@ public class Main {
         plane.startUp();
         plane.takeOff();
         plane.disembarkPassengers(4);
+
+        CustomLinkedList<Integer> list = new CustomLinkedList<>();
+        Integer uno = 1;
+        Integer dos = 2;
+        list.add(2);
+        list.add(1);
 
 
 /*
