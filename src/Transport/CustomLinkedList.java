@@ -140,6 +140,7 @@ public class CustomLinkedList<T>{
         if (this.size() > position) {
             if (position == 0) {
                 this.node = this.node.getFollowing();
+                LOGGER.info("The element was removed in the position 0 - Size list: " + this.size());
             }
             else {
                 NodeGeneric<T> nodeIndex = this.node;
@@ -150,6 +151,7 @@ public class CustomLinkedList<T>{
                 }
                 if (pos == position && nodeIndex.getFollowing() != null) {
                     nodeIndex.linkNode(nodeIndex.getFollowing().getFollowing());
+                    LOGGER.info("The element was removed in the position "+  position + "- Size list: " + this.size());
                 }
             }
         }
