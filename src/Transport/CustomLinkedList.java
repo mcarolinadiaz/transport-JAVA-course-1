@@ -6,10 +6,10 @@ import org.apache.logging.log4j.Logger;
 import java.util.Objects;
 
 // Linked list custom
-public class CustomLinkedList<T>{
+public class CustomLinkedList<T extends Comparable<T>>{
     private static final Logger LOGGER = LogManager.getLogger(CustomLinkedList.class);
     private NodeGeneric<T> node = null;
-    private class NodeGeneric<T> {
+    private class NodeGeneric<T extends Comparable<T>> implements Comparable<NodeGeneric<T>> {
         private T propertyNode;
         private NodeGeneric<T> following;
         public NodeGeneric() {
@@ -64,6 +64,11 @@ public class CustomLinkedList<T>{
         @Override
         public int hashCode() {
             return Objects.hash(getPropertyNode(), getFollowing());
+        }
+
+        @Override
+        public int compareTo(NodeGeneric<T> node) {
+            return this.getPropertyNode().compareTo(node.getPropertyNode());
         }
     }
     // Constructor
@@ -152,6 +157,46 @@ public class CustomLinkedList<T>{
                 if (pos == position && nodeIndex.getFollowing() != null) {
                     nodeIndex.linkNode(nodeIndex.getFollowing().getFollowing());
                     LOGGER.info("The element was removed in the position "+  position + "- Size list: " + this.size());
+                } else {
+                    LOGGER.warn("The element wasn't found");
+                }
+            }
+        }
+    }
+
+    // Returns the position at the element in the list.
+    public int getPosition(T element) {
+        int position = 0;
+        NodeGeneric<T> nodeIndex = this.node;
+        while (nodeIndex != null && nodeIndex.getPropertyNode().compareTo(element) != 0) {
+            nodeIndex = nodeIndex.getFollowing();
+            position += 1;
+        }
+        if (nodeIndex != null) {
+            return position;
+        }
+        position = -1;
+        return position;
+    }
+
+    // Removes the specific element in the list.
+    public void removeByElement(T element) {
+        if (this.node != null) {
+            if (this.node.getPropertyNode().compareTo(element) == 0) {
+                this.node = this.node.getFollowing();
+                LOGGER.info("The element was removed in the position 0 - Size list: " + this.size());
+            }
+            else {
+                NodeGeneric<T> nodeIndex = this.node;
+                while (nodeIndex.getFollowing() != null && nodeIndex.getFollowing().getPropertyNode().compareTo(element) != 0) {
+                    nodeIndex = nodeIndex.getFollowing();
+                }
+                if (nodeIndex.getFollowing() != null) {
+                    nodeIndex.linkNode(nodeIndex.getFollowing().getFollowing());
+                    LOGGER.info("The element was removed "+  element + "- Size list: " + this.size());
+                }
+                else {
+                    LOGGER.warn("The element wasn't found");
                 }
             }
         }

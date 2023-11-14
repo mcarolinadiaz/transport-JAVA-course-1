@@ -46,13 +46,19 @@ public class Main {
         list.add(3,0);
         list.add(6,7);
         list.add(8,1);
+        System.out.println("Element 3 at the position: " + list.getPosition(3));
+        System.out.println("Element 8 at the position: " + list.getPosition(8));
+        System.out.println("Element 2 at the position: " + list.getPosition(2));
+        System.out.println("Element 6 at the position: " + list.getPosition(6));
         System.out.println(list);
 
-        list.remove(1);
+        list.removeByElement(1);
         System.out.println(list);
-        list.remove(0);
+        list.removeByElement(3);
         System.out.println(list);
-        list.remove(list.size() - 1);
+        list.removeByElement(0);
+        System.out.println(list);
+        list.removeByElement(6);
         System.out.println(list);
 
 
