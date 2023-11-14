@@ -77,7 +77,7 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
 
     @Override
     public void startUp() {
-        System.out.println("The bus is started up");
+        LOGGER.info("The bus is started up");
     }
 
     @Override
@@ -92,7 +92,7 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
 
     @Override
     public void collectFees(int fee) {
-        System.out.println("Collecting fees...");
+        LOGGER.info("Collecting fees...");
     }
 
     private void setPassengers(ArrayList<String> passengers) {

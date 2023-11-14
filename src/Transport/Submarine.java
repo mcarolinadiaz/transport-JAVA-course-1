@@ -12,7 +12,7 @@ public class Submarine extends WaterVehicle {
     private static final int MAXDEPTH = 40000; // Static and final MAX depth propertie
     // Static block
     static {
-        System.out.println("The max depth level is 40000");
+        LOGGER.info("The max depth level is 40000");
     }
     // Default constructor
     public Submarine() {
