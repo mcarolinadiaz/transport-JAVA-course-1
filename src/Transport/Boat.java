@@ -124,9 +124,9 @@ public class Boat extends WaterVehicle implements IShipment {
     @Override
     public void unload() {
         if (!this.anchored) {
-            System.out.println("The boat needs to anchor!");
+            LOGGER.info("The boat needs to anchor!");
         } else {
-            System.out.println("Unloading...");
+            LOGGER.info("Unloading...");
         }
     }
 }
