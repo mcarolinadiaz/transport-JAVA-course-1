@@ -3,6 +3,8 @@ package Transport;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Objects;
+
 // Linked list custom
 public class CustomLinkedList<T>{
     private static final Logger LOGGER = LogManager.getLogger(CustomLinkedList.class);
@@ -56,6 +58,12 @@ public class CustomLinkedList<T>{
                     "propertyNode=" + propertyNode +
                     ", following=" + following +
                     '}';
+        }
+
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(getPropertyNode(), getFollowing());
         }
     }
     // Constructor
@@ -112,48 +120,50 @@ public class CustomLinkedList<T>{
         }
         return result;
     }
-    // Returns true if this list contains the specified element.
-    public boolean contains(T element) {
+    // Returns the element at the specified position in the list.
+    public T getElement(int position) {
         NodeGeneric<T> nodeIndex = this.node;
-        while (nodeIndex != null) {
-            if (nodeIndex.getPropertyNode().equals(element)) {
-                return true;
-            }
+        int pos = 0;
+        T element = null;
+        while (nodeIndex != null && pos < position) {
             nodeIndex = nodeIndex.getFollowing();
+            pos += 1;
         }
-        return false;
-    }
-    // Removes the first occurrence of the specified element from this list.
-    /*private void removeSpecificElement(NodeGeneric<T> delete) {
-        if (delete != null && delete.getFollowing() != null) {
-            NodeGeneric<T> nodeAux = delete;
-            if (delete.getFollowing() != null) {
-                nodeAux.linkedNode(delete.getFollowing());
-            }
-            nodeAux.linkedNode(delete.getFollowing());
+        if (pos == position && nodeIndex != null) {
+            element = nodeIndex.getPropertyNode();
         }
+        return element;
     }
-    public boolean remove(T element) {/*
-        NodeGeneric<T> nodeIndex = this.node;
-        if (nodeIndex != null) {
-            if (this.node.getFollowing() != null) {
+
+    // Removes the element at the specified position in the list.
+    public void remove(int position) {
+        if (this.size() > position) {
+            if (position == 0) {
                 this.node = this.node.getFollowing();
             }
-        }*//*
-        while (nodeIndex != null) {
-            if (nodeIndex.getPropertyNode().equals(element)) {
-
-                return true;
+            else {
+                NodeGeneric<T> nodeIndex = this.node;
+                int pos = 1;
+                while (nodeIndex.getFollowing() != null && pos < position) {
+                    nodeIndex = nodeIndex.getFollowing();
+                    pos += 1;
+                }
+                if (pos == position && nodeIndex.getFollowing() != null) {
+                    nodeIndex.linkNode(nodeIndex.getFollowing().getFollowing());
+                }
             }
-            nodeIndex = nodeIndex.getFollowing();
         }
-        return false;
-    }*/
+    }
 
     @Override
     public String toString() {
         return "CustomLinkedList{" +
                 "node=" + node +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(node);
     }
 }

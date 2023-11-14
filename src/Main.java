@@ -43,6 +43,13 @@ public class Main {
         list.add(8,1);
         System.out.println(list);
 
+        list.remove(1);
+        System.out.println(list);
+        list.remove(0);
+        System.out.println(list);
+        list.remove(list.size() - 1);
+        System.out.println(list);
+
 
 /*
         Submarine customSubmarine = new Submarine("0C", 2022, "petrol", 5000, 50000);
