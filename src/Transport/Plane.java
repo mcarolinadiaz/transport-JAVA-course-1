@@ -3,29 +3,39 @@ package Transport;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Plane extends AirVehicle implements IEmbark {
     private static final Logger LOGGER = LogManager.getLogger(Plane.class);
     private int availableSeats;
     private boolean flying;
+    private List<String> passengers;
+    private static final int MAXSEATS = 40;
     public Plane() {
         super();
         this.availableSeats = 40;
         this.flying = false;
+        this.passengers = new ArrayList<>();
     }
     public Plane(String model, int year, String propulsion, int availableSeats, boolean flying) {
         super(model, year, propulsion, flying);
         this.availableSeats = availableSeats;
         this.flying = true;
+        this.passengers = new ArrayList<>();
     }
 
     public int getAvailableSeats() {
         return availableSeats;
     }
 
-    public void setAvailableSeats(int availableSeats) {
-        this.availableSeats = availableSeats;
+    public void setAvailableSeats(int availableSeats) throws InvalidValueException {
+        if (availableSeats <= MAXSEATS) {
+            this.availableSeats = availableSeats;
+        }
+        LOGGER.warn("The value of available seats is invalid.");
+        throw new InvalidValueException("The value of available seats is invalid.");
     }
 
     public void takeOff() {
@@ -63,6 +73,10 @@ public class Plane extends AirVehicle implements IEmbark {
 
     public boolean isFlying() {
         return this.flying;
+    }
+
+    private void setPassengers(ArrayList<String> passengers) {
+        this.passengers.addAll(passengers);
     }
 
     @Override
@@ -109,37 +123,49 @@ public class Plane extends AirVehicle implements IEmbark {
 
 
     @Override
-    public void embarkPassengers(int passengers) throws NegativeValueException, InvalidValueException, InvalidOperationException {
-        if (passengers < 0) {
+    public void embarkPassengers(ArrayList<String> passengers) throws NegativeValueException, InvalidValueException, InvalidOperationException {
+        if (passengers.size() < 0) {
             LOGGER.error("The number of passengers is negative.");
             throw new NegativeValueException("The number of passengers is negative.");
-        } else if (this.getAvailableSeats() < passengers) {
+        } else if (MAXSEATS < passengers.size()) {
                 LOGGER.error("It doesn't have enough available seats for " + passengers + "people");
                 throw new InvalidValueException("It doesn't have enough available seats for " + passengers + "people");
-            } else if (this.getAvailableSeats() >= passengers) {
+            } else if (this.getAvailableSeats() >= passengers.size()) {
                 try {
                     if (isFlying()) {
                         throw new InvalidOperationException("The plane is flying now!");
                     } else {
                         LOGGER.info("Embarking...");
-                        this.setAvailableSeats(this.getAvailableSeats() - passengers);
+                        this.setAvailableSeats(this.getAvailableSeats() - passengers.size());
+                        this.setPassengers(passengers);
                     }
                 }
                 catch (InvalidOperationException e) {
                     LOGGER.error("Error: " + e.getMessage());
                 }
-            }
+            } else {
+            LOGGER.warn("It doesn't have enough available seats for "+ (passengers.size() - 1) + "people");
+        }
     }
 
     @Override
-    public void disembarkPassengers(int passengers) throws InvalidOperationException {
+    public void disembarkPassengers(ArrayList<String> passengers) throws InvalidOperationException {
         try {
             if (isFlying()) {
                 throw new InvalidOperationException("The plane is flying now and it is not possible to disembark!");
-            } else {
-                LOGGER.info("Disembarking...");
-                this.setAvailableSeats(this.getAvailableSeats() + passengers);
-            }
+            } else
+                try {
+                    if (passengers.size() <= MAXSEATS && !(this.passengers.isEmpty()) && passengers.size() <= this.passengers.size()) {
+                        LOGGER.info("Disembarking...");
+                        int newCountSeats = passengers.size();
+                        if (newCountSeats + this.passengers.size() > MAXSEATS) {
+                            newCountSeats = MAXSEATS;
+                        }
+                        this.setAvailableSeats(newCountSeats);
+                    }
+                } catch(NullPointerException e) {
+                    LOGGER.error("Error" + e.getMessage());
+                }
         }
         catch (InvalidOperationException e) {
             LOGGER.error("Error: " + e.getMessage());
