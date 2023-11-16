@@ -2,6 +2,7 @@ package Transport;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.w3c.dom.Node;
 
 import java.util.Objects;
 
@@ -199,6 +200,66 @@ public class CustomLinkedList<T extends Comparable<T>>{
                     LOGGER.warn("The element wasn't found");
                 }
             }
+        }
+    }
+    // Returns the node before the node which have the min value.
+    private NodeGeneric<T> followMinValue(NodeGeneric<T> compare) {
+        // if min = null => minValue = indexNodex
+        NodeGeneric<T> followMin = null;
+        NodeGeneric<T> indexNode = compare;
+        if (compare != null) {
+            boolean change = false;
+            followMin = indexNode;
+            while ( indexNode.getFollowing() != null ) {
+                if (followMin.getFollowing().compareTo(indexNode.getFollowing()) > 0) {
+                    followMin = indexNode;
+                    change = true;
+                }
+                indexNode = indexNode.getFollowing();
+            }
+            if (!change) { followMin = null;}
+        } else { // if compare == this.node
+            indexNode = this.node;
+            while (indexNode.getFollowing() != null) {
+                if (followMin == null && indexNode.compareTo(indexNode.getFollowing()) > 0 ||
+                        (followMin != null && followMin.getFollowing().compareTo(indexNode.getFollowing()) > 0)) {
+                    followMin = indexNode;
+                }
+                indexNode = indexNode.getFollowing();
+            }
+        }
+        return followMin;
+    }
+
+    // Sort the list ascending
+    public void sort() {
+        if (this.node != null && this.size() > 1) { // if the list has enough elements
+            NodeGeneric<T> followMin = followMinValue(null);
+            NodeGeneric<T> min = null;
+            if (followMin != null) {
+                min = followMin.getFollowing();
+                if (min != null) {
+                    followMin.linkNode(min.getFollowing());
+                    min.linkNode(this.node);
+                    this.node = min;
+                }
+            }
+            NodeGeneric<T> nodeIndex = this.node;
+            while (nodeIndex.getFollowing() != null) {
+                followMin = followMinValue(nodeIndex);
+                if (followMin != null) {
+                    min = followMin.getFollowing();
+                    if (min != null) {
+                        followMin.linkNode(min.getFollowing());
+                        min.linkNode(nodeIndex.getFollowing());
+                        nodeIndex.linkNode(min);
+                    }
+                }
+                nodeIndex = nodeIndex.getFollowing();
+            }
+        }
+        else {
+            LOGGER.warn("The list doesn't have enough elements");
         }
     }
 

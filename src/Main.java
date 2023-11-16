@@ -41,35 +41,21 @@ public class Main {
         CustomLinkedList<Integer> list = new CustomLinkedList<>();
         Integer uno = 1;
         Integer dos = 2;
-        list.add(uno);
         list.add(dos);
+        list.add(uno);
+        list.add(2);
         list.add(3,0);
         list.add(6,7);
         list.add(8,1);
-        System.out.println("Element 3 at the position: " + list.getPosition(3));
-        System.out.println("Element 8 at the position: " + list.getPosition(8));
-        System.out.println("Element 2 at the position: " + list.getPosition(2));
-        System.out.println("Element 6 at the position: " + list.getPosition(6));
-        System.out.println(list);
 
+        list.sort();
+
+        /*
         list.removeByElement(1);
-        System.out.println(list);
         list.removeByElement(3);
-        System.out.println(list);
         list.removeByElement(0);
-        System.out.println(list);
-        list.removeByElement(6);
-        System.out.println(list);
+        list.removeByElement(6);*/
 
-
-/*
-        Submarine customSubmarine = new Submarine("0C", 2022, "petrol", 5000, 50000);
-        Plane customPlane = new Plane("0A", 2020, "Jet fuels", 20, false);
-        Lorry customLorry = new Lorry();
-        Car customCar = new Car("0U", 2020, "gas oil", 4, new ArrayList<String>(), 5);
-        Bus customBus = new Bus("0Y", 2021, "petrol", 4, new ArrayList<String>(), 10);
-        Boat customBoat = new Boat("0R", 2023, "petrol", 5500, 2);
-*/
 
         LOGGER.info(lorry.getPropulsion());
         LOGGER.info(plane.toString());
