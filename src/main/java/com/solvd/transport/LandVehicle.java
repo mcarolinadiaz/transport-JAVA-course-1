@@ -3,8 +3,9 @@ package com.solvd.transport;
 import java.util.ArrayList;
 import java.util.List;
 
-// Abstract class representing a generic land vehicle that is kind of a vehicle in the Transport hierarchy.
-// This class encapsulates common properties and behaviors shared by all kind of land vehicles.
+/** Abstract class representing a generic land vehicle that is kind of a vehicle in the Transport hierarchy.
+ * This class encapsulates common properties and behaviors shared by all kind of land vehicles.
+ */
 abstract class LandVehicle extends Vehicle {
     protected int wheels;                       // Wheels of the land vehicle
     private List<String> suitableTerrain;  // List of suitable terrain for the land vehicle

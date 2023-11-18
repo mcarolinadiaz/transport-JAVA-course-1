@@ -4,6 +4,7 @@ import java.util.List;
 
 // Abstract class representing a generic vehicle in the Transport hierarchy.
 // This class encapsulates common properties and behaviors shared by all vehicles.
+
 abstract class Vehicle {
     protected String model;         // Model of the vehicle
     protected int year;             // Year of the vehicle

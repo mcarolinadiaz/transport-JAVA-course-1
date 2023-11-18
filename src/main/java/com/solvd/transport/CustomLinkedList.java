@@ -5,7 +5,9 @@ import java.util.Objects;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-// Linked list custom
+/** Linked list custom
+ * @param <T>
+ */
 public class CustomLinkedList<T extends Comparable<T>>{
     private static final Logger LOGGER = LogManager.getLogger(CustomLinkedList.class);
     private NodeGeneric<T> node = null;
@@ -72,6 +74,7 @@ public class CustomLinkedList<T extends Comparable<T>>{
         }
     }
     // Constructor
+
     public CustomLinkedList() {
         this.node = null;
     }

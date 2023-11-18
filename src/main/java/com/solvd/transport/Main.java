@@ -55,6 +55,8 @@ public class Main {
         list.removeByElement(6);*/
 
 
+
+
         LOGGER.info(lorry.getPropulsion());
         LOGGER.info(plane.toString());
 
