@@ -41,4 +41,8 @@ practice-6:
 - Add 2 Plugins.
 - Run mvn for different phases from the Maven lifecycle. Check the result.
 
+practice-7:
+- generate a conflict
+- make a pr with branches
+- make a pr with forks
 
