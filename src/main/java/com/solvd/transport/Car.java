@@ -6,6 +6,10 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Instances of this class can be created to model different cars with varying
+ *  * models, years, propulsion mechanisms, and door configurations.
+ */
 public final class Car extends LandVehicle implements IElectricTransport, AutoCloseable {
     // properties
     private static final Logger LOGGER = LogManager.getLogger(Car.class);
@@ -20,7 +24,7 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
         this.doorsClosed = new ArrayList<Boolean>();
         this.closeDoors();
     }
-    public Car(String model, int year, String propulsion, int wheels, ArrayList<String> suitableTerrain, int doors) {
+    public Car(String model, int year, String propulsion, int wheels, List<String> suitableTerrain, int doors) {
         super(model, year, propulsion, wheels, suitableTerrain);
         this.doors = doors;
         this.doorsClosed = new ArrayList<Boolean>();
@@ -76,7 +80,11 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
     public void setPropulsion(String propulsion) {
         super.setPropulsion(propulsion);
     }
-
+    /**
+     * Opens the doors of the car.
+     * If the number of doors exceeds the current configuration, additional doors are added.
+     * Existing doors are set to the open state (true).
+     */
     public void openDoors() {
         for (int i=0; i < this.doors; i++) {
             if (i >= this.doorsClosed.size()) {
@@ -86,7 +94,11 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
             }
         }
     }
-
+    /**
+     * Closes the doors of the car.
+     * If the number of doors exceeds the current configuration, additional doors are added.
+     * Existing doors are set to the closed state (false).
+     */
     public void closeDoors() {
         for (int i=0; i < this.doors; i++) {
             if (i >= this.doorsClosed.size()) {
@@ -100,15 +112,19 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
     public boolean areDoorsClosed() {
         return !(this.doorsClosed.contains(false));
     }
-
+    /**
+     * Starts up the car.
+     * If the doors are already closed, the car is started up, and an information log is generated.
+     * If any doors are open, they are automatically closed before starting up, and a corresponding log is generated.
+     */
     @Override
     public void startUp() {
         if (this.areDoorsClosed()) {
-            LOGGER.info("The car is started up");
+            LOGGER.info("The car has started up successfully.");
         }
         else {
             this.closeDoors();
-            LOGGER.info("Doors were closed and The car is started up");
+            LOGGER.info("Doors were closed and the car has started up successfully.");
         }
     }
 
@@ -117,7 +133,11 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
     public void chargeEnergy() {
         this.lowBattery = false;
     }
-
+    /**
+     * Closes the car as an AutoCloseable resource.
+     * The usage of this exception may need to be revisited for better design and consistency.
+     *
+     */
     @Override
     public void close() throws NotClosedException {
         throw new NotClosedException("Car was closed");

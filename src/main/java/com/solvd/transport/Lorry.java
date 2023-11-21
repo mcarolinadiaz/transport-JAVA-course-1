@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Lorry extends LandVehicle implements IShipment {
     private static final Logger LOGGER = LogManager.getLogger(Lorry.class);
@@ -16,7 +17,8 @@ public class Lorry extends LandVehicle implements IShipment {
         this.capacity = 40;
         this.driving = false;
     }
-    public Lorry(String model, int year, String propulsion, int wheels, ArrayList<String> suitableTerrain, int load, int capacity) {
+    public Lorry(String model, int year, String propulsion, int wheels,
+                 List<String> suitableTerrain, int load, int capacity) {
         super(model, year, propulsion, wheels, suitableTerrain);
         this.load = load;
         this.capacity = capacity;
@@ -43,7 +45,7 @@ public class Lorry extends LandVehicle implements IShipment {
         return super.getSuitableTerrain();
     }
 
-    public void setSuitableTerrain(ArrayList<String> suitableTerrain) {
+    public void setSuitableTerrain(List<String> suitableTerrain) {
         super.setSuitableTerrain(suitableTerrain);
     }
 

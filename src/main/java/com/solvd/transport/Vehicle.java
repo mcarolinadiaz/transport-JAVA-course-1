@@ -2,21 +2,26 @@ package com.solvd.transport;
 
 import java.util.List;
 
-// Abstract class representing a generic vehicle in the Transport hierarchy.
-// This class encapsulates common properties and behaviors shared by all vehicles.
-
+/**
+ * Abstract class representing a generic vehicle in the Transport hierarchy.
+ * This class encapsulates common properties and behaviors shared by all vehicles.
+ */
 abstract class Vehicle {
     protected String model;         // Model of the vehicle
     protected int year;             // Year of the vehicle
     protected String propulsion;    // Type of propulsion (e.g., petrol, jet fuel)
     protected static final List<String> PROPULSION = List.of(new String[]{"petrol", "jet fuel", "gas oil"});
-    // Default constructor initializes instance variables with default values.
+    /**
+     * Default constructor initializes instance variables with default values.
+     */
     public Vehicle() {
         this.model = "";
         this.year = 2023;
         this.propulsion = "petrol";
     }
-    // Custom constructor allows setting initial values for model, year, and propulsion.
+    /**
+     * Custom constructor allows setting initial values for model, year, and propulsion.
+     */
     public Vehicle(String model, int year, String propulsion) {
         this.model = model;
         this.year = year;
@@ -62,8 +67,10 @@ abstract class Vehicle {
         this.propulsion = propulsion;
     }
 
-    // Abstract method representing the startup behavior of the vehicle.
-    // Subclasses must provide their own implementation.
+    /**
+     * Abstract method representing the startup behavior of the vehicle.
+     * Subclasses must provide their own implementation.
+     */
     public abstract void startUp();
 
 
