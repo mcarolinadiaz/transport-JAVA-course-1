@@ -34,3 +34,9 @@ practice-4:
 practice-5:
 - Add 5 collections to the hierarchy. 
 - Create custom LinkedList with generic.
+
+  practice-7:
+- generate a conflict
+- make a pr with branches
+- make a pr with forks
+
