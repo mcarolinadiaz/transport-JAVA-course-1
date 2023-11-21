@@ -35,7 +35,13 @@ practice-5:
 - Add 5 collections to the hierarchy. 
 - Create custom LinkedList with generic.
 
-  practice-7:
+practice-6:
+- Move all projects to Maven. 
+- Build jar file and deploy to the local repository. 
+- Add 2 Plugins.
+- Run mvn for different phases from the Maven lifecycle. Check the result.
+
+practice-7:
 - generate a conflict
 - make a pr with branches
 - make a pr with forks
