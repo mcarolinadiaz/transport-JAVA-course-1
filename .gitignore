@@ -2,6 +2,12 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+lib/
+!**/src/log4j2.xml
+src/main/resources/log4j2.xml
+app.log
+.idea/
+target
 
 ### Eclipse ###
 .apt_generated
