@@ -79,7 +79,9 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
     public void startUp() {
         LOGGER.info("The bus is started up");
     }
-
+    /**
+     * Custom toString method to provide a string representation of the Bus object.
+     */
     @Override
     public String toString() {
         return "Bus{" + '\'' +
@@ -98,7 +100,12 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
     private void setPassengers(List<String> passengers) {
         this.passengers.addAll(passengers);
     }
-
+    /**
+     * Embarks passengers onto the bus.
+     * This method checks the number of available seats.
+     * If conditions are met, passengers are added to the bus, and the available seats are updated.
+     *
+     */
     @Override
     public void embarkPassengers(List<String> passengers) throws InvalidValueException,
             InvalidOperationException {
@@ -119,7 +126,12 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
         }
 
     }
-
+    /**
+     * Disembarks passengers onto the bus.
+     * This method checks the number of available seats.
+     * If conditions are met, passengers and the available seats are updated to the bus.
+     *
+     */
     @Override
     public void disembarkPassengers(List<String> passengers) {
         if (passengers.size() <= MAX_SEATS && passengers.size() <= this.passengers.size()) {

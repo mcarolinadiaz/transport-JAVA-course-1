@@ -102,7 +102,9 @@ public class Plane extends AirVehicle implements IEmbark {
             LOGGER.error("The plane has already took off and is flying!");
         }
     }
-
+    /**
+     * Custom equals method to compare Plane objects based on their attributes.
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -119,7 +121,9 @@ public class Plane extends AirVehicle implements IEmbark {
                 Objects.equals(this.propulsion, p.getPropulsion());
 
     }
-
+    /**
+     * Custom toString method to provide a string representation of the Plane object.
+     */
     @Override
     public String toString() {
         return "Plane{" + '\'' +
@@ -130,7 +134,9 @@ public class Plane extends AirVehicle implements IEmbark {
                 "flying=" + this.isFlying() + '\'' +
                 "}";
     }
-
+    /**
+     * Custom hashCode method to generate a hash code for Plane objects.
+     */
     @Override
     public final int hashCode() {
         return Objects.hash(this.getAvailableSeats(), this.isFlying(), this.getYear(),
@@ -179,7 +185,6 @@ public class Plane extends AirVehicle implements IEmbark {
      * If conditions are met, passengers and the available seats are updated to the plane.
      *
      */
-
     @Override
     public void disembarkPassengers(List<String> passengers) throws InvalidOperationException {
         try {

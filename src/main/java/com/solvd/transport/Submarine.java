@@ -105,7 +105,9 @@ public class Submarine extends WaterVehicle {
                 this.getPropulsion().equals(s.getPropulsion()) && this.isSubmerge() == s.isSubmerge();
 
     }
-
+    /**
+     * Custom toString method to provide a string representation of the Submarine object.
+     */
     @Override
     public String toString() {
         return "Submarine{" + '\'' +
@@ -117,7 +119,9 @@ public class Submarine extends WaterVehicle {
                 "isSubmerge=" + this.isSubmerge() + '\'' +
                 "}";
     }
-
+    /**
+     * Custom hashCode method to generate a hash code for Submarine objects.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(this.getLength(), this.getDepth(), this.getYear(), this.getModel(),

@@ -26,7 +26,6 @@ abstract class LandVehicle extends Vehicle {
         this.setSuitableTerrain(suitableTerrain);
     }
     // Getters and setters
-
     public int getWheels() {
         return wheels;
     }

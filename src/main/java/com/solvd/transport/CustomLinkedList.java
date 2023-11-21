@@ -62,7 +62,9 @@ public class CustomLinkedList<T extends Comparable<T>>{
                     '}';
         }
 
-
+        /**
+         * Custom hashCode method to generate a hash code for NodeGeneric objects.
+         */
         @Override
         public int hashCode() {
             return Objects.hash(getPropertyNode(), getFollowing());
@@ -272,6 +274,9 @@ public class CustomLinkedList<T extends Comparable<T>>{
                 '}';
     }
 
+    /**
+     * Custom hashCode method to generate a hash code for CustomLinkedList objects.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(node);
