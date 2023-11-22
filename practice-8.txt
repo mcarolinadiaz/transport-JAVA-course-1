@@ -1,3 +1,6 @@
-Read text from the file and calculate the numbers of the unique words
-Write the result to the file
-The main requirement is using StringUtils and FileUtils to implement it with minimum lines of code
+The
+Two A
+The
+O A The Lo
+The number of the unique words in this file is: 3
+The number of the unique words in this file is: 12
