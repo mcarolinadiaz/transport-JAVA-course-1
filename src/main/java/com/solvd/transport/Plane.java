@@ -7,12 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/** Plane class representing a kind of air vehicle in the Transport hierarchy.
+ * This class includes features specific to planes, such as the ability to take off,
+ *  * land, embark and disembark passengers, and maintain information about available seats.
+ */
 public class Plane extends AirVehicle implements IEmbark {
     private static final Logger LOGGER = LogManager.getLogger(Plane.class);
     private int availableSeats;
     private boolean flying;
-    private List<String> passengers;
-    private static final int MAXSEATS = 40;
+    private final List<String> passengers;
+    private static final int MAX_SEATS = 40;
     public Plane() {
         super();
         this.availableSeats = 40;
@@ -31,20 +35,30 @@ public class Plane extends AirVehicle implements IEmbark {
     }
 
     public void setAvailableSeats(int availableSeats) throws InvalidValueException {
-        if (availableSeats <= MAXSEATS) {
+        if (availableSeats <= MAX_SEATS) {
             this.availableSeats = availableSeats;
+        } else {
+            LOGGER.warn("The value of available seats is invalid.");
+            throw new InvalidValueException("The value of available seats is invalid.");
         }
-        LOGGER.warn("The value of available seats is invalid.");
-        throw new InvalidValueException("The value of available seats is invalid.");
     }
-
+    /**
+     * Initiates the takeoff sequence for the plane.
+     * The plane must be on the ground to perform takeoff.
+     */
     public void takeOff() {
         this.startUp();
         this.flying = true;
-        LOGGER.info("The plane is flying");
+        LOGGER.info("The plane has taken off successfully.");
     }
+    /**
+     * Initiates the landing sequence for the plane.
+     * If the plane is currently flying, it will be marked as landed.
+     * No further operations are allowed until the plane takes off again.
+     */
     public void land() {
         this.flying = false;
+        LOGGER.info("The plane has landed successfully.");
     }
 
     public String getModel() {
@@ -75,35 +89,41 @@ public class Plane extends AirVehicle implements IEmbark {
         return this.flying;
     }
 
-    private void setPassengers(ArrayList<String> passengers) {
+    private void setPassengers(List<String> passengers) {
         this.passengers.addAll(passengers);
     }
 
     @Override
     public void startUp() {
         if (!this.flying) {
-            LOGGER.info("The plane is started up");
+            LOGGER.info("The plane is started up.");
         }
         else {
             LOGGER.error("The plane has already took off and is flying!");
         }
     }
-
+    /**
+     * Custom equals method to compare Plane objects based on their attributes.
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this) {
             return true;
         }
-        if ((o == null) || (o.getClass().equals(this.getClass()))) {
+        if (!o.getClass().equals(this.getClass())) {
             return false;
         }
         Plane p = (Plane) o;
-        return this.getAvailableSeats() == p.getAvailableSeats() && this.flying == p.isFlying() &&
-                this.getModel().equals(p.getModel()) && this.getYear() == p.getYear() &&
-                this.propulsion.equals(p.getPropulsion());
+        return this.getAvailableSeats() == p.getAvailableSeats() &&
+                this.flying == p.isFlying() &&
+                Objects.equals(this.getModel(), p.getModel()) &&
+                this.getYear() == p.getYear() &&
+                Objects.equals(this.propulsion, p.getPropulsion());
 
     }
-
+    /**
+     * Custom toString method to provide a string representation of the Plane object.
+     */
     @Override
     public String toString() {
         return "Plane{" + '\'' +
@@ -114,28 +134,39 @@ public class Plane extends AirVehicle implements IEmbark {
                 "flying=" + this.isFlying() + '\'' +
                 "}";
     }
-
+    /**
+     * Custom hashCode method to generate a hash code for Plane objects.
+     */
     @Override
     public final int hashCode() {
-        return Objects.hash(this.getAvailableSeats(), this.isFlying(), this.getYear(), this.getModel(),
-                this.getYear(), this.getPropulsion());
+        return Objects.hash(this.getAvailableSeats(), this.isFlying(), this.getYear(),
+                this.getModel(), this.getPropulsion());
     }
 
-
+    /**
+     * Embarks passengers onto the plane.
+     *
+     * This method checks the number of available seats and the flying status of the plane.
+     * If conditions are met, passengers are added to the plane, and the available seats are updated.
+     *
+     */
     @Override
-    public void embarkPassengers(ArrayList<String> passengers) throws NegativeValueException, InvalidValueException, InvalidOperationException {
+    public void embarkPassengers(List<String> passengers) throws NegativeValueException,
+            InvalidValueException {
         if (passengers.size() < 0) {
             LOGGER.error("The number of passengers is negative.");
             throw new NegativeValueException("The number of passengers is negative.");
-        } else if (MAXSEATS < passengers.size()) {
-                LOGGER.error("It doesn't have enough available seats for " + passengers + "people");
-                throw new InvalidValueException("It doesn't have enough available seats for " + passengers + "people");
+        } else if (MAX_SEATS < passengers.size()) {
+                LOGGER.error(
+                        "It doesn't have enough available seats for " + passengers + "people");
+                throw new InvalidValueException("It doesn't have enough available seats for "
+                        + passengers.size() + "people");
             } else if (this.getAvailableSeats() >= passengers.size()) {
                 try {
                     if (isFlying()) {
                         throw new InvalidOperationException("The plane is flying now!");
                     } else {
-                        LOGGER.info("Embarking...");
+                        LOGGER.info("Passengers are being embarked.");
                         this.setAvailableSeats(this.getAvailableSeats() - passengers.size());
                         this.setPassengers(passengers);
                     }
@@ -144,27 +175,27 @@ public class Plane extends AirVehicle implements IEmbark {
                     LOGGER.error("Error: " + e.getMessage());
                 }
             } else {
-            LOGGER.warn("It doesn't have enough available seats for "+ (passengers.size() - 1) + "people");
+            LOGGER.warn("It doesn't have enough available seats for "+
+                    (passengers.size() - 1) + "people");
         }
     }
-
+    /**
+     * Disembarks passengers onto the plane.
+     * This method checks the number of available seats and the flying status of the plane.
+     * If conditions are met, passengers and the available seats are updated to the plane.
+     *
+     */
     @Override
-    public void disembarkPassengers(ArrayList<String> passengers) throws InvalidOperationException {
+    public void disembarkPassengers(List<String> passengers) throws InvalidOperationException {
         try {
             if (isFlying()) {
-                throw new InvalidOperationException("The plane is flying now and it is not possible to disembark!");
+                throw new InvalidOperationException(
+                        "The plane is flying now and it is not possible to disembark!");
             } else
-                try {
-                    if (passengers.size() <= MAXSEATS && !(this.passengers.isEmpty()) && passengers.size() <= this.passengers.size()) {
-                        LOGGER.info("Disembarking...");
-                        int newCountSeats = passengers.size();
-                        if (newCountSeats + this.passengers.size() > MAXSEATS) {
-                            newCountSeats = MAXSEATS;
-                        }
-                        this.setAvailableSeats(newCountSeats);
-                    }
-                } catch(NullPointerException e) {
-                    LOGGER.error("Error" + e.getMessage());
+                if (!this.passengers.isEmpty() && passengers.size() <= this.passengers.size()) {
+                    LOGGER.info("Passengers are being disembarked.");
+                    int newCountSeats = Math.min(passengers.size(), MAX_SEATS);
+                    this.setAvailableSeats(newCountSeats);
                 }
         }
         catch (InvalidOperationException e) {

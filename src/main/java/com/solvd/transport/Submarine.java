@@ -9,7 +9,7 @@ public class Submarine extends WaterVehicle {
     private static final Logger LOGGER = LogManager.getLogger(Submarine.class);
     private int depth;
     private boolean isSubmerge;
-    private static final int MAXDEPTH = 40000; // Static and final MAX depth propertie
+    private static final int MAX_DEPTH = 40000; // Static and final MAX depth propertie
     // Static block
     static {
         LOGGER.info("The max depth level is 40000");
@@ -105,7 +105,9 @@ public class Submarine extends WaterVehicle {
                 this.getPropulsion().equals(s.getPropulsion()) && this.isSubmerge() == s.isSubmerge();
 
     }
-
+    /**
+     * Custom toString method to provide a string representation of the Submarine object.
+     */
     @Override
     public String toString() {
         return "Submarine{" + '\'' +
@@ -117,14 +119,18 @@ public class Submarine extends WaterVehicle {
                 "isSubmerge=" + this.isSubmerge() + '\'' +
                 "}";
     }
-
+    /**
+     * Custom hashCode method to generate a hash code for Submarine objects.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(this.getLength(), this.getDepth(), this.getYear(), this.getModel(),
-                this.getYear(), this.getPropulsion(), this.isSubmerge(), MAXDEPTH);
+                this.getYear(), this.getPropulsion(), this.isSubmerge(), MAX_DEPTH);
     }
-    // Static boolean function that verify if the submarine is available to submerge
+    /**
+     * Static boolean function that verify if the submarine is available to submerge
+     */
     public static boolean isAvailableDepth(int depth) {
-        return MAXDEPTH > depth;
+        return MAX_DEPTH > depth;
     }
 }

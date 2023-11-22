@@ -10,14 +10,14 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
     private static final Logger LOGGER = LogManager.getLogger(Bus.class);
     private int availableSeats;
     private List<String> passengers;
-    private static final int MAXSEATS = 40;
+    private static final int MAX_SEATS = 40;
     public Bus() {
         super();
         this.availableSeats = 40;
         this.passengers = new ArrayList<>();
     }
     public Bus(String model, int year, String propulsion, int wheels,
-               ArrayList<String> suitableTerrain, int availableSeats) {
+               List<String> suitableTerrain, int availableSeats) {
         super(model, year, propulsion, wheels, suitableTerrain);
         this.availableSeats = availableSeats;
         this.passengers = new ArrayList<>();
@@ -28,7 +28,7 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
     }
 
     public void setAvailableSeats(int availableSeats) throws InvalidValueException {
-        if (availableSeats <= MAXSEATS) {
+        if (availableSeats <= MAX_SEATS) {
             this.availableSeats = availableSeats;
         }
         LOGGER.warn("The value of available seats is invalid.");
@@ -47,7 +47,7 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
         return super.getSuitableTerrain();
     }
 
-    public void setSuitableTerrain(ArrayList<String> suitableTerrain) {
+    public void setSuitableTerrain(List<String> suitableTerrain) {
         super.setSuitableTerrain(suitableTerrain);
     }
 
@@ -79,7 +79,9 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
     public void startUp() {
         LOGGER.info("The bus is started up");
     }
-
+    /**
+     * Custom toString method to provide a string representation of the Bus object.
+     */
     @Override
     public String toString() {
         return "Bus{" + '\'' +
@@ -95,34 +97,48 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
         LOGGER.info("Collecting fees...");
     }
 
-    private void setPassengers(ArrayList<String> passengers) {
+    private void setPassengers(List<String> passengers) {
         this.passengers.addAll(passengers);
     }
-
+    /**
+     * Embarks passengers onto the bus.
+     * This method checks the number of available seats.
+     * If conditions are met, passengers are added to the bus, and the available seats are updated.
+     *
+     */
     @Override
-    public void embarkPassengers(ArrayList<String> passengers) throws InvalidValueException {
-        if (MAXSEATS < passengers.size()) {
-            LOGGER.error("It doesn't have enough available seats for " + passengers + "people");
-            throw new InvalidValueException("It doesn't have enough available seats for " + passengers + "people");
+    public void embarkPassengers(List<String> passengers) throws InvalidValueException,
+            InvalidOperationException {
+        if (MAX_SEATS < passengers.size()) {
+            LOGGER.error("It doesn't have enough available seats for " +
+                    passengers + "people");
+            throw new InvalidValueException("It doesn't have enough available seats for " +
+                    passengers + "people");
         } else {
             if (this.getAvailableSeats() > passengers.size()) {
                 LOGGER.info("Embarking...");
                 this.setAvailableSeats(this.getAvailableSeats() - passengers.size());
                 this.setPassengers(passengers);
             } else {
-                LOGGER.warn("It doesn't have enough available seats for " + (passengers.size() - 1) + "people");
+                LOGGER.warn("It doesn't have enough available seats for " +
+                        (passengers.size() - 1) + "people");
             }
         }
 
     }
-
+    /**
+     * Disembarks passengers onto the bus.
+     * This method checks the number of available seats.
+     * If conditions are met, passengers and the available seats are updated to the bus.
+     *
+     */
     @Override
-    public void disembarkPassengers(ArrayList<String> passengers) {
-        if (passengers.size() <= MAXSEATS && passengers.size() <= this.passengers.size()) {
+    public void disembarkPassengers(List<String> passengers) {
+        if (passengers.size() <= MAX_SEATS && passengers.size() <= this.passengers.size()) {
             LOGGER.info("Disembarking...");
             int newCountSeats = passengers.size();
-            if (newCountSeats + this.passengers.size() > MAXSEATS) {
-                newCountSeats = MAXSEATS;
+            if (newCountSeats + this.passengers.size() > MAX_SEATS) {
+                newCountSeats = MAX_SEATS;
             }
             this.setAvailableSeats(newCountSeats);
         }

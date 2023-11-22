@@ -3,8 +3,10 @@ package com.solvd.transport;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Abstract class representing a generic land vehicle that is kind of a vehicle in the Transport hierarchy.
- * This class encapsulates common properties and behaviors shared by all kind of land vehicles.
+/** Abstract class representing a generic land vehicle that is kind of
+ * a vehicle in the Transport hierarchy.
+ * This class encapsulates common properties and behaviors shared by
+ * all kind of land vehicles.
  */
 abstract class LandVehicle extends Vehicle {
     protected int wheels;                       // Wheels of the land vehicle
@@ -16,14 +18,14 @@ abstract class LandVehicle extends Vehicle {
         this.suitableTerrain = new ArrayList<>();
     }
     // Custom constructor
-    public LandVehicle(String model, int year, String propulsion, int wheels, ArrayList<String> suitableTerrain) {
+    public LandVehicle(String model, int year, String propulsion,
+                       int wheels, List<String> suitableTerrain) {
         super(model, year, propulsion);
         this.wheels = wheels;
         this.suitableTerrain = new ArrayList<>();
         this.setSuitableTerrain(suitableTerrain);
     }
     // Getters and setters
-
     public int getWheels() {
         return wheels;
     }
@@ -41,7 +43,7 @@ abstract class LandVehicle extends Vehicle {
         return new ArrayList<>(this.suitableTerrain);
     }
 
-    public void setSuitableTerrain(ArrayList<String>  suitableTerrain) {
+    public void setSuitableTerrain(List<String>  suitableTerrain) {
         for (String s : suitableTerrain) {
             this.suitableTerrain.add(s);
         }

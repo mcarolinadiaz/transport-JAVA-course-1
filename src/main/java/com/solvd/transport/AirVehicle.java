@@ -1,14 +1,19 @@
 package com.solvd.transport;
 
-// Abstract class representing a generic air vehicle that is kind of a vehicle in the Transport hierarchy.
-// This class encapsulates common behaviors shared by all kind of air vehicles.
+/**
+ * Abstract class representing a generic air vehicle that is kind of a vehicle in the Transport hierarchy.
+ * This class encapsulates common behaviors shared by all kind of air vehicles.
+ */
 abstract class AirVehicle extends Vehicle {
-    //Default constructor
-
+    /**
+     * Default constructor
+     */
     public AirVehicle() {
         super();
     }
-    //Custom constructor
+    /**
+     * Custom constructor
+     */
     public AirVehicle(String model, int year, String propulsion) {
         super(model, year, propulsion);
     }
@@ -16,7 +21,9 @@ abstract class AirVehicle extends Vehicle {
     public abstract void takeOff();
     public abstract void land();
 
-    // Getters and Setters
+    /**
+     * Getters and Setters
+     */
     public String getModel() {
         return super.getModel();
     }
