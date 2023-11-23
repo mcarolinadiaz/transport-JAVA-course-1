@@ -5,17 +5,26 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Class representing a Bus, a type of LandVehicle used for public transportation.
+ * Implements the IPublicTransport and IEmbark interfaces.
+ */
 public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
     private static final Logger LOGGER = LogManager.getLogger(Bus.class);
     private int availableSeats;
     private List<String> passengers;
     private static final int MAX_SEATS = 40;
+    /**
+     * Default constructor initializes default values for a bus.
+     */
     public Bus() {
         super();
         this.availableSeats = 40;
         this.passengers = new ArrayList<>();
     }
+    /**
+     * Custom constructor to set values for a Bus.
+     */
     public Bus(String model, int year, String propulsion, int wheels,
                List<String> suitableTerrain, int availableSeats) {
         super(model, year, propulsion, wheels, suitableTerrain);
@@ -23,16 +32,26 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
         this.passengers = new ArrayList<>();
     }
     // Getters & Setters
+    /**
+     * Get the number of available seats on the bus.
+     * @return The number of available seats.
+     */
     public int getAvailableSeats() {
         return availableSeats;
     }
-
+    /**
+     * Set the number of available seats on the bus.
+     */
     public void setAvailableSeats(int availableSeats) throws InvalidValueException {
-        if (availableSeats <= MAX_SEATS) {
-            this.availableSeats = availableSeats;
+        try {
+            if (availableSeats <= MAX_SEATS) {
+                this.availableSeats = availableSeats;
+            } else {
+                throw new InvalidValueException("The value of available seats is invalid.");
+            }
+        } catch (InvalidValueException e) {
+            LOGGER.warn("Invalid value for available seats: " + e.getMessage());
         }
-        LOGGER.warn("The value of available seats is invalid.");
-        throw new InvalidValueException("The value of available seats is invalid.");
     }
 
     public int getWheels() {
@@ -74,7 +93,9 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
     public void setPropulsion(String propulsion) {
         super.setPropulsion(propulsion);
     }
-
+    /**
+     * Start up the bus and log the event.
+     */
     @Override
     public void startUp() {
         LOGGER.info("The bus is started up");
@@ -84,19 +105,27 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
      */
     @Override
     public String toString() {
-        return "Bus{" + '\'' +
-                "model=" + this.getModel() + '\'' +
-                "year=" + this.getYear() + '\'' +
-                "propulsion=" + this.getPropulsion() + '\'' +
-                "availableSeats=" + this.getAvailableSeats() + '\'' +
+        return "Bus{" +
+                "model='" + this.getModel() + '\'' +
+                ", year=" + this.getYear() +
+                ", propulsion='" + this.getPropulsion() + '\'' +
+                ", availableSeats=" + this.getAvailableSeats() +
                 "}";
     }
-
+    /**
+     * Collect fees from passengers.
+     * Log the event.
+     */
     @Override
-    public void collectFees(int fee) {
+    public int collectFees(int fee) {
         LOGGER.info("Collecting fees...");
+        return this.passengers.size() * fee;
     }
+    // Private method to set passengers
 
+    /**
+     * Set the list of passengers on the bus.
+     */
     private void setPassengers(List<String> passengers) {
         this.passengers.addAll(passengers);
     }
