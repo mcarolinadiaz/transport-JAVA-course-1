@@ -16,7 +16,9 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
     private final int doors;
     private List<Boolean> doorsClosed;
     private boolean lowBattery;
-    // Default constructor
+    /**
+     * Default constructor
+     */
     public Car() {
         super();
         this.doors = 4;

@@ -6,7 +6,10 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
+/**
+ * Class representing a Lorry, a type of LandVehicle for transporting.
+ * Implements the IShipment interface.
+ */
 public class Lorry extends LandVehicle implements IShipment {
     private static final Logger LOGGER = LogManager.getLogger(Lorry.class);
     private int load;
@@ -14,7 +17,7 @@ public class Lorry extends LandVehicle implements IShipment {
     private boolean driving;
 
     /**
-     * Default constructor
+     * Default constructor initializes default values.
      */
     public Lorry() {
         super();
@@ -87,7 +90,9 @@ public class Lorry extends LandVehicle implements IShipment {
         this.driving = true;
         LOGGER.info("The lorry is started up");
     }
-
+    /**
+     * Override equals method to compare Lorry objects based on their load, capacity, and driving status.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -117,11 +122,16 @@ public class Lorry extends LandVehicle implements IShipment {
                 ", propulsion='" + propulsion + '\'' +
                 '}';
     }
-
+    /**
+     * Brake method to stop the lorry from driving.
+     */
     public void brake() {
         this.driving = false;
     }
-
+    /**
+     * Load method implementation from the IShipment interface.
+     * Warns if the lorry is currently driving, otherwise logs the loading process.
+     */
     @Override
     public void load() {
         if (this.driving) {
@@ -130,7 +140,10 @@ public class Lorry extends LandVehicle implements IShipment {
             LOGGER.info("Loading...");
         }
     }
-
+    /**
+     * Unload method implementation from the IShipment interface.
+     * Warns if the lorry is currently driving, otherwise logs the unloading process.
+     */
     @Override
     public void unload() {
         if (this.driving) {

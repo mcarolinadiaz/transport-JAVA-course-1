@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.Objects;
 /**
  * Boat class representing a water vehicle.
+ * Inherits from WaterVehicle and implements the IShipment interface.
  */
 public class Boat extends WaterVehicle implements IShipment {
     private static final Logger LOGGER = LogManager.getLogger(Boat.class);
@@ -29,19 +30,26 @@ public class Boat extends WaterVehicle implements IShipment {
     }
     /**
      * Getters and Setters
+     * Get the number of anchors on the boat.
      */
     public int getAnchors() {
         return anchors;
     }
-
+    /**
+     * Set the number of anchors on the boat.
+     */
     public void setAnchors(int anchors) {
         this.anchors = anchors;
     }
-
+    /**
+     * Raise the anchors on the boat.
+     */
     public void raiseAnchors() {
         this.anchored = false;
     }
-
+    /**
+     * Anchor the boat.
+     */
     public void anchored() {
         this.anchored = true;
     }
@@ -78,8 +86,10 @@ public class Boat extends WaterVehicle implements IShipment {
         super.setPropulsion(propulsion);
     }
 
+    // Override methods from the parent class
+
     /**
-     * Overridden methods from the parent class and interfaces are implemented here.
+     * Overridden startUp method to raise anchors before starting the boat.
      */
     @Override
     public void startUp() {
@@ -127,6 +137,8 @@ public class Boat extends WaterVehicle implements IShipment {
                 this.getYear(), this.getPropulsion());
     }
 
+    // Implement methods from the IShipment interface
+
     /**
      * Method to load cargo onto the boat. Checks if the boat is anchored before loading.
      */
@@ -138,7 +150,9 @@ public class Boat extends WaterVehicle implements IShipment {
             LOGGER.info("Loading...");
         }
     }
-
+    /**
+     * Method to unload cargo from the boat. Checks if the boat is anchored before unloading.
+     */
     @Override
     public void unload() {
         if (!this.anchored) {
