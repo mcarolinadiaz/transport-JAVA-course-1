@@ -4,7 +4,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
-
+/**
+ * Submarine class representing a water vehicle.
+ * Inherits from WaterVehicle.
+ */
 public class Submarine extends WaterVehicle {
     private static final Logger LOGGER = LogManager.getLogger(Submarine.class);
     private int depth;
@@ -90,7 +93,9 @@ public class Submarine extends WaterVehicle {
             LOGGER.warn("The plane has already submerged and is sailing!");
         }
     }
-
+    /**
+     * Custom equals method to compare Submarine objects based on their attributes.
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this) {
