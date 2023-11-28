@@ -1,7 +1,6 @@
 package com.solvd.transport;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.LineIterator;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,6 +9,10 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * This class reads a text file, counts the number of unique words, and logs the result.
@@ -64,5 +67,30 @@ public class Main {
             // Logging an error if an exception occurs
             LOGGER.error("Error: "+ e.getMessage());
         }
+        //-------------------------------------------------------------------------------//
+        // Use at least 5 lambda functions from the java.util.function package.
+        Bus bus = new Bus("MOD20", 2005, "petrol", 4,
+                List.of("street"), 50);
+        Consumer<String> c = (x) -> LOGGER.info(StringUtils.upperCase(x));
+        String busString = bus.toString();
+
+        Supplier<String> sup = () -> busString;
+        c.accept(sup.get());
+
+        Predicate<String> pred = (x) -> busString.startsWith("Bus");
+
+        Function<Integer, String> fun = (x) -> Integer.toString(x);
+        LOGGER.info(fun.apply(bus.getYear()));
+
+        Runnable run = () -> LOGGER.info("Bus as String starts with the world 'Bus': " +
+                pred.test(sup.get()));
+        run.run();
+
+
     }
+
+
+
+
+
 }
