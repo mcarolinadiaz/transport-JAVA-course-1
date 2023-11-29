@@ -14,6 +14,9 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
     private int availableSeats;
     private List<String> passengers;
     private static final int MAX_SEATS = 40;
+    private ICalculateFee<Integer> iCalculateFee = (x) -> {
+      return this.passengers.size() * x;
+    };
     /**
      * Default constructor initializes default values for a bus.
      */
@@ -119,7 +122,7 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
     @Override
     public int collectFees(int fee) {
         LOGGER.info("Collecting fees...");
-        return this.passengers.size() * fee;
+        return iCalculateFee.calculateFee(fee);
     }
     // Private method to set passengers
 

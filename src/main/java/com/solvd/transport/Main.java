@@ -43,7 +43,7 @@ public class Main {
     /**
      * Main method that reads lines from a file, processes them, and logs the result.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InvalidOperationException {
         try {
             // Reading lines from the file using FileUtils
             List<String> lines = FileUtils.readLines(new File("practice-8.txt"));
@@ -85,6 +85,12 @@ public class Main {
         Runnable run = () -> LOGGER.info("Bus as String starts with the world 'Bus': " +
                 pred.test(sup.get()));
         run.run();
+
+        // Create 3 custom Lambda functions with generics.
+        Car car = new Car();
+        car.startUp();
+        bus.embarkPassengers(List.of("Anna", "John"));
+        LOGGER.info("The total of the collection of fee is: "+bus.collectFees(30));
 
 
     }
