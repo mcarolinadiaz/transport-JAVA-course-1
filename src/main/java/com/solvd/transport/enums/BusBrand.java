@@ -1,15 +1,17 @@
 package com.solvd.transport.enums;
 
 public enum BusBrand {
-    MERCEDES("Mercedes"),
-    VOLVO("Volvo"),
-    SCANIA("Scania");
+    MERCEDES("Mercedes", Country.GERMANY),
+    VOLVO("Volvo", Country.SWITZERLAND),
+    SCANIA("Scania", Country.SWITZERLAND);
 
     private final String brandName;
+    private Country country;
 
     // Constructor
-    BusBrand(String brandName) {
+    BusBrand(String brandName, Country country) {
         this.brandName = brandName;
+        this.country = country;
     }
     public String getBrandName() {
         return brandName;
