@@ -1,5 +1,7 @@
 package com.solvd.transport;
 
+import com.solvd.transport.enums.Roads;
+import com.solvd.transport.interfaces.IShipment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,7 +32,7 @@ public class Lorry extends LandVehicle implements IShipment {
      * Custom constructor
      */
     public Lorry(String model, int year, String propulsion, int wheels,
-                 List<String> suitableTerrain, int load, int capacity) {
+                 List<Roads> suitableTerrain, int load, int capacity) {
         super(model, year, propulsion, wheels, suitableTerrain);
         this.load = load;
         this.capacity = capacity;
@@ -53,11 +55,11 @@ public class Lorry extends LandVehicle implements IShipment {
         super.setWheels(wheels);
     }
 
-    public ArrayList<String> getSuitableTerrain() {
+    public ArrayList<Roads> getSuitableTerrain() {
         return super.getSuitableTerrain();
     }
 
-    public void setSuitableTerrain(List<String> suitableTerrain) {
+    public void setSuitableTerrain(List<Roads> suitableTerrain) {
         super.setSuitableTerrain(suitableTerrain);
     }
 

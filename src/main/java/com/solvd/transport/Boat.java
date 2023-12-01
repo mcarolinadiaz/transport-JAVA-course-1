@@ -1,5 +1,6 @@
 package com.solvd.transport;
 
+import com.solvd.transport.interfaces.IShipment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -1,5 +1,7 @@
 package com.solvd.transport;
 
+import com.solvd.transport.enums.Roads;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,7 @@ import java.util.List;
  */
 abstract class LandVehicle extends Vehicle {
     protected int wheels;                       // Wheels of the land vehicle
-    private List<String> suitableTerrain;  // List of suitable terrain for the land vehicle
+    private List<Roads> suitableTerrain;  // List of suitable terrain for the land vehicle
     // Default constructor
     public LandVehicle() {
         super();
@@ -19,7 +21,7 @@ abstract class LandVehicle extends Vehicle {
     }
     // Custom constructor
     public LandVehicle(String model, int year, String propulsion,
-                       int wheels, List<String> suitableTerrain) {
+                       int wheels, List<Roads> suitableTerrain) {
         super(model, year, propulsion);
         this.wheels = wheels;
         this.suitableTerrain = new ArrayList<>();
@@ -39,13 +41,13 @@ abstract class LandVehicle extends Vehicle {
         }
     }
 
-    public ArrayList<String> getSuitableTerrain() {
+    public ArrayList<Roads> getSuitableTerrain() {
         return new ArrayList<>(this.suitableTerrain);
     }
 
-    public void setSuitableTerrain(List<String>  suitableTerrain) {
-        for (String s : suitableTerrain) {
-            this.suitableTerrain.add(s);
+    public void setSuitableTerrain(List<Roads>  suitableTerrain) {
+        for (Roads r : Roads.values()) {
+            this.suitableTerrain.add(r);
         }
     }
 

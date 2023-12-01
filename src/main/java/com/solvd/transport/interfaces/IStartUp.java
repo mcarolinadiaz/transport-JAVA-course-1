@@ -1,4 +1,4 @@
-package com.solvd.transport;
+package com.solvd.transport.interfaces;
 
 /** IStartUp is custom Lambda functions with generics.
  * @param <T> is a generic param.

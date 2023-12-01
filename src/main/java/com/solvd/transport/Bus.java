@@ -1,5 +1,9 @@
 package com.solvd.transport;
 
+import com.solvd.transport.enums.Roads;
+import com.solvd.transport.interfaces.ICalculateFee;
+import com.solvd.transport.interfaces.IEmbark;
+import com.solvd.transport.interfaces.IPublicTransport;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,7 +33,7 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
      * Custom constructor to set values for a Bus.
      */
     public Bus(String model, int year, String propulsion, int wheels,
-               List<String> suitableTerrain, int availableSeats) {
+               List<Roads> suitableTerrain, int availableSeats) {
         super(model, year, propulsion, wheels, suitableTerrain);
         this.availableSeats = availableSeats;
         this.passengers = new ArrayList<>();
@@ -65,11 +69,11 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
         super.setWheels(wheels);
     }
 
-    public ArrayList<String> getSuitableTerrain() {
+    public ArrayList<Roads> getSuitableTerrain() {
         return super.getSuitableTerrain();
     }
 
-    public void setSuitableTerrain(List<String> suitableTerrain) {
+    public void setSuitableTerrain(List<Roads> suitableTerrain) {
         super.setSuitableTerrain(suitableTerrain);
     }
 

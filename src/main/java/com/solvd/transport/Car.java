@@ -1,5 +1,9 @@
 package com.solvd.transport;
 
+import com.solvd.transport.enums.Roads;
+import com.solvd.transport.interfaces.IDoors;
+import com.solvd.transport.interfaces.IElectricTransport;
+import com.solvd.transport.interfaces.IStartUp;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -45,7 +49,7 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
             }
         };
     }
-    public Car(String model, int year, String propulsion, int wheels, List<String> suitableTerrain, int doors) {
+    public Car(String model, int year, String propulsion, int wheels, List<Roads> suitableTerrain, int doors) {
         super(model, year, propulsion, wheels, suitableTerrain);
         this.doors = doors;
         this.doorsClosed = new ArrayList<Boolean>();
@@ -79,11 +83,11 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
         super.setWheels(wheels);
     }
 
-    public ArrayList<String> getSuitableTerrain() {
+    public ArrayList<Roads> getSuitableTerrain() {
         return super.getSuitableTerrain();
     }
 
-    public void setSuitableTerrain(ArrayList<String> suitableTerrain) {
+    public void setSuitableTerrain(ArrayList<Roads> suitableTerrain) {
         super.setSuitableTerrain(suitableTerrain);
     }
 
