@@ -1,21 +1,21 @@
 package com.solvd.transport.enums;
 
 public enum Propulsion {
-    GASOLINE("gasoline", 1),
-    DIESEL("diesel", 2),
-    NATURAL_GAS("naturalGas", 3),
-    PROPANE("propane",4),
-    ETHANOL("ethanol",5),
-    METHANOL("methanol",6),
-    HYDROGEN("hydrogen",7),
-    BIODIESEL("biodiesel",8),
+    GASOLINE("gasoline", FuelType.LIQUID),
+    DIESEL("diesel", FuelType.LIQUID),
+    NATURAL_GAS("naturalGas", FuelType.GAS),
+    PROPANE("propane", FuelType.GAS),
+    ETHANOL("ethanol", FuelType.LIQUID),
+    METHANOL("methanol", FuelType.LIQUID),
+    HYDROGEN("hydrogen", FuelType.GAS),
+    BIODIESEL("biodiesel", FuelType.LIQUID),
     ;
     private String propulsion;
-    private int num;
+    private FuelType fuelType;
 
-    Propulsion(String propulsion, int num) {
+    Propulsion(String propulsion, FuelType fuelType) {
         this.propulsion = propulsion;
-        this.num = num;
+        this.fuelType = fuelType;
     }
 
     public String getPropulsion() {
@@ -26,12 +26,22 @@ public enum Propulsion {
         this.propulsion = propulsion;
     }
 
-    public int getNum() {
-        return num;
-    }
+    public enum FuelType {
+        LIQUID("Liquid"),
+        GAS("Gas"),
+        ;
+        private String type;
+        FuelType(String type) {
+            this.type = type;
+        }
 
-    public void setNum(int num) {
-        this.num = num;
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
     }
 
 }
