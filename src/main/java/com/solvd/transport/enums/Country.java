@@ -6,6 +6,8 @@ public enum Country {
     MEXICO("Mexico"),
     UNITED_STATES("UnitedStates"),
     SWITZERLAND("Switzerland"),
+    FRANCE("France"),
+    ITALY("Italy"),
     ;
     private String country;
     Country(String country) {

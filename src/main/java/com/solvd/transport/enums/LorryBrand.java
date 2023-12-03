@@ -1,15 +1,16 @@
 package com.solvd.transport.enums;
 
-public enum CarBrand {
-    TOYOTA("Toyota", Country.JAPAN),
-    HONDA("Honda", Country.JAPAN),
-    FORD("Ford", Country.UNITED_STATES);
+public enum LorryBrand {
+    MERCEDES("Mercedes", Country.GERMANY),
+    IVECO("Iveco", Country.ITALY),
+    RENAULT("Renault", Country.FRANCE),
+    SCANIA("Scania", Country.SWITZERLAND);
 
     private final String brandName;
     private Country country;
 
     // Constructor
-    CarBrand(String brandName, Country country) {
+    LorryBrand(String brandName, Country country) {
         this.brandName = brandName;
         this.country = country;
     }
