@@ -45,6 +45,8 @@ public class Main {
      * Main method that reads lines from a file, processes them, and logs the result.
      */
     public static void main(String[] args) throws IOException, InvalidOperationException {
+        String saludo = "Hola maca";
+        
         try {
             // Reading lines from the file using FileUtils
             List<String> lines = FileUtils.readLines(new File("practice-8.txt"));
