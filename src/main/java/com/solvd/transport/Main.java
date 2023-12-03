@@ -1,6 +1,6 @@
 package com.solvd.transport;
 
-import com.solvd.transport.enums.Roads;
+import com.solvd.transport.enums.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -70,7 +70,7 @@ public class Main {
         }
         //-------------------------------------------------------------------------------//
         // Use at least 5 lambda functions from the java.util.function package.
-        Bus bus = new Bus("MOD20", 2005, "gasoline", 4,
+        Bus bus = new Bus("MOD20", 2005, Propulsion.GASOLINE, 4,
                 List.of(Roads.CRONCRETE, Roads.ASPHALT), 50);
         Consumer<String> c = (x) -> LOGGER.info(StringUtils.upperCase(x));
         String busString = bus.toString();
@@ -90,15 +90,27 @@ public class Main {
         // Create 3 custom Lambda functions with generics.
         try (Car car = new Car()) {
             car.startUp();
+            car.setCarBrand(CarBrand.HONDA);
         } catch (NotClosedException e) {
             System.out.println("Exception message: " + e.getMessage());
         }
-        bus.embarkPassengers(List.of("Anna", "John"));
+        bus.embarkPassengers(List.of("Anna", "John", "Sean", "Jacob", "Tiffany"));
         LOGGER.info("The total of the collection of fee is: "+bus.collectFees(30));
 
         // Use of the complex enum Roads
         LOGGER.info("The road condition of the two road from the bus is: "+ bus.getRoadConditionByNumber(2));
 
+        // Add 7 collection streaming in the hierarchy with terminal and non-terminal operations
+        bus.setBusBrand(BusBrand.MERCEDES);
+        Lorry lorry = new Lorry();
+        lorry.setLorryBrand(LorryBrand.SCANIA);
+        Bus bus1 = new Bus();
+        bus1.setBusBrand(BusBrand.VOLVO);
+
+        LOGGER.info("The number of passengers inside the bus that the name start with 'J' is: "+ bus.getCountPassengers("J"));
+
+        bus.setPropulsion(Propulsion.DIESEL);
+        LOGGER.info("The number of liquid fuel is: "+ bus.getKindOfPropulsion("Liquid"));
 
     }
 

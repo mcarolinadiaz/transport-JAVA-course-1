@@ -1,5 +1,9 @@
 package com.solvd.transport;
 
+import com.solvd.transport.enums.Propulsion;
+
+import java.util.List;
+
 /**
  * Abstract class representing a generic air vehicle that is kind of a vehicle in the Transport hierarchy.
  * This class encapsulates common behaviors shared by all kind of air vehicles.
@@ -14,7 +18,7 @@ abstract class AirVehicle extends Vehicle {
     /**
      * Custom constructor
      */
-    public AirVehicle(String model, int year, String propulsion) {
+    public AirVehicle(String model, int year, Propulsion propulsion) {
         super(model, year, propulsion);
     }
 
@@ -40,11 +44,11 @@ abstract class AirVehicle extends Vehicle {
         super.setYear(year);
     }
 
-    public String getPropulsion() {
+    public List<Propulsion> getPropulsion() {
         return super.getPropulsion();
     }
 
-    public void setPropulsion(String propulsion) {
+    public void setPropulsion(Propulsion propulsion) {
         super.setPropulsion(propulsion);
     }
 

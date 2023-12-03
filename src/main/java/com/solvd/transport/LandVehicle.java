@@ -1,9 +1,11 @@
 package com.solvd.transport;
 
+import com.solvd.transport.enums.Propulsion;
 import com.solvd.transport.enums.Roads;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /** Abstract class representing a generic land vehicle that is kind of
  * a vehicle in the Transport hierarchy.
@@ -20,7 +22,7 @@ abstract class LandVehicle extends Vehicle {
         this.suitableTerrain = new ArrayList<>();
     }
     // Custom constructor
-    public LandVehicle(String model, int year, String propulsion,
+    public LandVehicle(String model, int year, Propulsion propulsion,
                        int wheels, List<Roads> suitableTerrain) {
         super(model, year, propulsion);
         this.wheels = wheels;
@@ -67,11 +69,11 @@ abstract class LandVehicle extends Vehicle {
         super.setYear(year);
     }
 
-    public String getPropulsion() {
+    public List<Propulsion> getPropulsion() {
         return super.getPropulsion();
     }
 
-    public void setPropulsion(String propulsion) {
+    public void setPropulsion(Propulsion propulsion) {
         super.setPropulsion(propulsion);
     }
 
@@ -79,4 +81,36 @@ abstract class LandVehicle extends Vehicle {
     public Roads.RoadCondition getRoadConditionByNumber(int roadNumber) {
         return this.suitableTerrain.get(roadNumber).getRoadCondition();
     }
+
+    /**
+     * @param roadC
+     * @return
+     */
+    public List<Roads> getAllRoadsByCondition(Roads.RoadCondition roadC) {
+        return this.suitableTerrain.stream()
+                .filter(road -> road.getRoadCondition().getCondition().equals(roadC.getCondition()))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * @param roadC
+     * @return
+     */
+    public List<String> getAllRoadsNameByCondition(Roads.RoadCondition roadC) {
+        return this.suitableTerrain.stream()
+                .filter(road -> road.getRoadCondition().equals(roadC))
+                .map(road -> road.getRoad())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * @param durability
+     * @return
+     */
+    public List<Roads> getAllMaxDurability(int durability) {
+        return this.suitableTerrain.stream()
+                .filter(r -> r.getDurability() >= durability)
+                .collect(Collectors.toList());
+    }
+
 }

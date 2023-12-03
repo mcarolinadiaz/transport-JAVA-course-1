@@ -1,5 +1,9 @@
 package com.solvd.transport;
 
+import com.solvd.transport.enums.Propulsion;
+
+import java.util.List;
+
 /**
  * Abstract class representing a generic water vehicle that is kind of a vehicle in the Transport hierarchy.
  * This class encapsulates common properties and behaviors shared by all kind of water vehicles.
@@ -16,7 +20,7 @@ abstract class WaterVehicle extends Vehicle {
     /**
      * Custom constructor; calls Father's custom constructor
      */
-    public WaterVehicle(String model, int year, String propulsion, int length) {
+    public WaterVehicle(String model, int year, Propulsion propulsion, int length) {
         super(model, year, propulsion);
         this.length = length;
     }
@@ -47,11 +51,11 @@ abstract class WaterVehicle extends Vehicle {
         super.setYear(year);
     }
 
-    public String getPropulsion() {
+    public List<Propulsion> getPropulsion() {
         return super.getPropulsion();
     }
 
-    public void setPropulsion(String propulsion) {
+    public void setPropulsion(Propulsion propulsion) {
         super.setPropulsion(propulsion);
     }
 

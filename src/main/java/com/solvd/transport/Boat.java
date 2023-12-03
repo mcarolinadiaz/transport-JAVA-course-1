@@ -1,9 +1,11 @@
 package com.solvd.transport;
 
+import com.solvd.transport.enums.Propulsion;
 import com.solvd.transport.interfaces.IShipment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
 import java.util.Objects;
 /**
  * Boat class representing a water vehicle.
@@ -24,7 +26,7 @@ public class Boat extends WaterVehicle implements IShipment {
     /**
      * Custom constructor with additional parameters for anchors and initializes the boat as anchored.
      */
-    public Boat(String model, int year, String propulsion, int length, int anchors) {
+    public Boat(String model, int year, Propulsion propulsion, int length, int anchors) {
         super(model, year, propulsion, length);
         this.anchors = anchors;
         this.anchored = true;
@@ -79,11 +81,11 @@ public class Boat extends WaterVehicle implements IShipment {
         super.setYear(year);
     }
 
-    public String getPropulsion() {
+    public List<Propulsion> getPropulsion() {
         return super.getPropulsion();
     }
 
-    public void setPropulsion(String propulsion) {
+    public void setPropulsion(Propulsion propulsion) {
         super.setPropulsion(propulsion);
     }
 
@@ -112,8 +114,7 @@ public class Boat extends WaterVehicle implements IShipment {
         }
         Boat b = (Boat) o;
         return this.getAnchors() == b.getAnchors() && this.getLength() == b.getLength() &&
-                this.getModel().equals(b.getModel()) && this.getYear() == b.getYear() &&
-                this.propulsion.equals(b.getPropulsion());
+                this.getModel().equals(b.getModel()) && this.getYear() == b.getYear();
 
     }
     /**
