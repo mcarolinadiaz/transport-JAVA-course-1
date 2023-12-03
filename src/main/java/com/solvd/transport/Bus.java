@@ -1,5 +1,10 @@
 package com.solvd.transport;
 
+import com.solvd.transport.enums.BusBrand;
+import com.solvd.transport.enums.Roads;
+import com.solvd.transport.interfaces.ICalculateFee;
+import com.solvd.transport.interfaces.IEmbark;
+import com.solvd.transport.interfaces.IPublicTransport;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,6 +19,10 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
     private int availableSeats;
     private List<String> passengers;
     private static final int MAX_SEATS = 40;
+    private BusBrand busBrand;
+    private ICalculateFee<Integer> iCalculateFee = (x) -> {
+      return this.passengers.size() * x;
+    };
     /**
      * Default constructor initializes default values for a bus.
      */
@@ -26,7 +35,7 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
      * Custom constructor to set values for a Bus.
      */
     public Bus(String model, int year, String propulsion, int wheels,
-               List<String> suitableTerrain, int availableSeats) {
+               List<Roads> suitableTerrain, int availableSeats) {
         super(model, year, propulsion, wheels, suitableTerrain);
         this.availableSeats = availableSeats;
         this.passengers = new ArrayList<>();
@@ -62,11 +71,11 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
         super.setWheels(wheels);
     }
 
-    public ArrayList<String> getSuitableTerrain() {
+    public ArrayList<Roads> getSuitableTerrain() {
         return super.getSuitableTerrain();
     }
 
-    public void setSuitableTerrain(List<String> suitableTerrain) {
+    public void setSuitableTerrain(List<Roads> suitableTerrain) {
         super.setSuitableTerrain(suitableTerrain);
     }
 
@@ -93,6 +102,15 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
     public void setPropulsion(String propulsion) {
         super.setPropulsion(propulsion);
     }
+
+    public BusBrand getBusBrand() {
+        return busBrand;
+    }
+
+    public void setBusBrand(BusBrand busBrand) {
+        this.busBrand = busBrand;
+    }
+
     /**
      * Start up the bus and log the event.
      */
@@ -119,7 +137,7 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
     @Override
     public int collectFees(int fee) {
         LOGGER.info("Collecting fees...");
-        return this.passengers.size() * fee;
+        return iCalculateFee.calculateFee(fee);
     }
     // Private method to set passengers
 

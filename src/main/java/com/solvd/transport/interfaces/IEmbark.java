@@ -1,4 +1,6 @@
-package com.solvd.transport;
+package com.solvd.transport.interfaces;
+
+import com.solvd.transport.InvalidOperationException;
 
 import java.util.List;
 

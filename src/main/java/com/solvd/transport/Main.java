@@ -1,7 +1,7 @@
 package com.solvd.transport;
 
+import com.solvd.transport.enums.Roads;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.LineIterator;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,6 +10,10 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * This class reads a text file, counts the number of unique words, and logs the result.
@@ -40,7 +44,7 @@ public class Main {
     /**
      * Main method that reads lines from a file, processes them, and logs the result.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InvalidOperationException {
         try {
             // Reading lines from the file using FileUtils
             List<String> lines = FileUtils.readLines(new File("practice-8.txt"));
@@ -64,5 +68,42 @@ public class Main {
             // Logging an error if an exception occurs
             LOGGER.error("Error: "+ e.getMessage());
         }
+        //-------------------------------------------------------------------------------//
+        // Use at least 5 lambda functions from the java.util.function package.
+        Bus bus = new Bus("MOD20", 2005, "gasoline", 4,
+                List.of(Roads.CRONCRETE, Roads.ASPHALT), 50);
+        Consumer<String> c = (x) -> LOGGER.info(StringUtils.upperCase(x));
+        String busString = bus.toString();
+
+        Supplier<String> sup = () -> busString;
+        c.accept(sup.get());
+
+        Predicate<String> pred = (x) -> busString.startsWith("Bus");
+
+        Function<Integer, String> fun = (x) -> Integer.toString(x);
+        LOGGER.info(fun.apply(bus.getYear()));
+
+        Runnable run = () -> LOGGER.info("Bus as String starts with the world 'Bus': " +
+                pred.test(sup.get()));
+        run.run();
+
+        // Create 3 custom Lambda functions with generics.
+        try (Car car = new Car()) {
+            car.startUp();
+        } catch (NotClosedException e) {
+            System.out.println("Exception message: " + e.getMessage());
+        }
+        bus.embarkPassengers(List.of("Anna", "John"));
+        LOGGER.info("The total of the collection of fee is: "+bus.collectFees(30));
+
+        // Use of the complex enum Roads
+        LOGGER.info("The road condition of the two road from the bus is: "+ bus.getRoadConditionByNumber(2));
+
+
     }
+
+
+
+
+
 }

@@ -80,7 +80,9 @@ public class CustomLinkedList<T extends Comparable<T>>{
     public CustomLinkedList() {
         this.node = null;
     }
-    // When you need add an element without specific position
+    /**
+     * When you need add an element without specific position
+     */
     public void add(T element) {
         if (this.node == null) {
             this.node = new NodeGeneric<>(element);
@@ -94,7 +96,9 @@ public class CustomLinkedList<T extends Comparable<T>>{
             LOGGER.info("The element "+ element + " was added in the position - Size list: " + this.size());
         }
     }
-    // Add element with specific position
+    /**
+     * Add element with specific position
+     */
     public void add(T element, int position) {
         if (this.node == null) {
             this.node = new NodeGeneric<T>(element);
@@ -116,11 +120,15 @@ public class CustomLinkedList<T extends Comparable<T>>{
                 LOGGER.info("The element "+ element + " was added in the position " + position + "- Size list: " + this.size());
             }
     }
-    // To check if list is empty or not.
+    /**
+     * To check if list is empty or not.
+     */
     public boolean isEmpty() {
         return this.node == null;
     }
-    // To get the number of elements in the list.
+    /**
+     * To get the number of elements in the list.
+     */
     public int size() {
         int result = 0;
         NodeGeneric<T> nodeIndex = this.node;
@@ -130,7 +138,9 @@ public class CustomLinkedList<T extends Comparable<T>>{
         }
         return result;
     }
-    // Returns the element at the specified position in the list.
+    /**
+     * Returns the element at the specified position in the list.
+     */
     public T getElement(int position) {
         NodeGeneric<T> nodeIndex = this.node;
         int pos = 0;
@@ -145,7 +155,9 @@ public class CustomLinkedList<T extends Comparable<T>>{
         return element;
     }
 
-    // Removes the element at the specified position in the list.
+    /**
+     * Removes the element at the specified position in the list.
+     */
     public void remove(int position) {
         if (this.size() > position) {
             if (position == 0) {
@@ -169,7 +181,9 @@ public class CustomLinkedList<T extends Comparable<T>>{
         }
     }
 
-    // Returns the position at the element in the list.
+    /**
+     * Returns the position at the element in the list.
+     */
     public int getPosition(T element) {
         int position = 0;
         NodeGeneric<T> nodeIndex = this.node;
@@ -184,7 +198,9 @@ public class CustomLinkedList<T extends Comparable<T>>{
         return position;
     }
 
-    // Removes the specific element in the list.
+    /**
+     * Removes the specific element in the list.
+     */
     public void removeByElement(T element) {
         if (this.node != null) {
             if (this.node.getPropertyNode().compareTo(element) == 0) {
@@ -206,7 +222,9 @@ public class CustomLinkedList<T extends Comparable<T>>{
             }
         }
     }
-    // Returns the node before the node which have the min value.
+    /**
+     * Returns the node before the node which have the min value.
+     */
     private NodeGeneric<T> followMinValue(NodeGeneric<T> compare) {
         // if min = null => minValue = indexNodex
         NodeGeneric<T> followMin = null;
@@ -235,7 +253,9 @@ public class CustomLinkedList<T extends Comparable<T>>{
         return followMin;
     }
 
-    // Sort the list ascending
+    /**
+     * Sort the list ascending
+     */
     public void sort() {
         if (this.node != null && this.size() > 1) { // if the list has enough elements
             NodeGeneric<T> followMin = followMinValue(null);
