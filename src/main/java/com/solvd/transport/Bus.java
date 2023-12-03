@@ -1,5 +1,6 @@
 package com.solvd.transport;
 
+import com.solvd.transport.enums.BusBrand;
 import com.solvd.transport.enums.Roads;
 import com.solvd.transport.interfaces.ICalculateFee;
 import com.solvd.transport.interfaces.IEmbark;
@@ -18,6 +19,7 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
     private int availableSeats;
     private List<String> passengers;
     private static final int MAX_SEATS = 40;
+    private BusBrand busBrand;
     private ICalculateFee<Integer> iCalculateFee = (x) -> {
       return this.passengers.size() * x;
     };
@@ -100,6 +102,15 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
     public void setPropulsion(String propulsion) {
         super.setPropulsion(propulsion);
     }
+
+    public BusBrand getBusBrand() {
+        return busBrand;
+    }
+
+    public void setBusBrand(BusBrand busBrand) {
+        this.busBrand = busBrand;
+    }
+
     /**
      * Start up the bus and log the event.
      */

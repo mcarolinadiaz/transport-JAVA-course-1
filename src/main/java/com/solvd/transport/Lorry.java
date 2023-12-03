@@ -1,5 +1,6 @@
 package com.solvd.transport;
 
+import com.solvd.transport.enums.LorryBrand;
 import com.solvd.transport.enums.Roads;
 import com.solvd.transport.interfaces.IShipment;
 import org.apache.logging.log4j.LogManager;
@@ -17,6 +18,7 @@ public class Lorry extends LandVehicle implements IShipment {
     private int load;
     private int capacity;
     private boolean driving;
+    private LorryBrand lorryBrand;
 
     /**
      * Default constructor initializes default values.
@@ -85,6 +87,14 @@ public class Lorry extends LandVehicle implements IShipment {
 
     public void setPropulsion(String propulsion) {
         super.setPropulsion(propulsion);
+    }
+
+    public LorryBrand getLorryBrand() {
+        return lorryBrand;
+    }
+
+    public void setLorryBrand(LorryBrand lorryBrand) {
+        this.lorryBrand = lorryBrand;
     }
 
     @Override

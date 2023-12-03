@@ -26,7 +26,7 @@ abstract class Vehicle {
     public Vehicle(String model, int year, String propulsion) {
         this.model = model;
         this.year = year;
-        this.propulsion = propulsion;
+        this.setPropulsion(propulsion);
     }
 
     // Getters & Setters
@@ -58,6 +58,7 @@ abstract class Vehicle {
         boolean match = false;
         for (Propulsion p : Propulsion.values()) {
             if (p.getPropulsion().equals(propulsion)) {
+                this.propulsion = propulsion;
                 match = true;
                 break;
             }

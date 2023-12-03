@@ -1,5 +1,6 @@
 package com.solvd.transport;
 
+import com.solvd.transport.enums.Roads;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -69,8 +70,8 @@ public class Main {
         }
         //-------------------------------------------------------------------------------//
         // Use at least 5 lambda functions from the java.util.function package.
-        Bus bus = new Bus("MOD20", 2005, "petrol", 4,
-                List.of("street"), 50);
+        Bus bus = new Bus("MOD20", 2005, "gasoline", 4,
+                List.of(Roads.CRONCRETE, Roads.ASPHALT), 50);
         Consumer<String> c = (x) -> LOGGER.info(StringUtils.upperCase(x));
         String busString = bus.toString();
 

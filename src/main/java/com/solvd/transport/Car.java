@@ -1,5 +1,6 @@
 package com.solvd.transport;
 
+import com.solvd.transport.enums.CarBrand;
 import com.solvd.transport.enums.Roads;
 import com.solvd.transport.interfaces.IDoors;
 import com.solvd.transport.interfaces.IElectricTransport;
@@ -20,6 +21,7 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
     private final int doors;
     private List<Boolean> doorsClosed;
     private boolean lowBattery;
+    private CarBrand carBrand;
     private IStartUp<Car> iSU = (x) -> {
         if (this.areDoorsClosed()) {
             LOGGER.info("The car "+x+" has started up successfully.");
@@ -114,6 +116,15 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
     public void setPropulsion(String propulsion) {
         super.setPropulsion(propulsion);
     }
+
+    public CarBrand getCarBrand() {
+        return carBrand;
+    }
+
+    public void setCarBrand(CarBrand carBrand) {
+        this.carBrand = carBrand;
+    }
+
     /**
      * Opens the doors of the car.
      * If the number of doors exceeds the current configuration, additional doors are added.
