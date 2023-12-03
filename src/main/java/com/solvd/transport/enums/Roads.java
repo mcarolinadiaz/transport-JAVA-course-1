@@ -1,5 +1,7 @@
 package com.solvd.transport.enums;
-
+/**
+ * Enum representing different types of roads and their durability.
+ */
 public enum Roads {
     CRONCRETE ("concrete", 10),
     ASPHALT ("asphalt", 8),
@@ -9,12 +11,16 @@ public enum Roads {
     ;
     private String road;
     private int durability;
-
+    /**
+     * Constructor for Roads enum.
+     * @param road The type of road.
+     * @param durability The durability of the road.
+     */
     Roads(String road, int durability) {
         this.road = road;
         this.durability = durability;
     }
-
+    // Getters & Setters
     public String getRoad() {
         return road;
     }
@@ -30,7 +36,9 @@ public enum Roads {
     public void setDurability(int num) {
         this.durability = durability;
     }
-
+    /**
+     * Enum representing different road conditions.
+     */
     public enum RoadCondition {
         EXCELLENT("Excellent"),
         GOOD("Good"),
@@ -53,7 +61,9 @@ public enum Roads {
             this.condition = condition;
         }
     }
-
+    /**
+     * Get the road condition based on durability.
+     */
     public RoadCondition getRoadCondition() {
         if (this.durability > 8) {
             return RoadCondition.EXCELLENT;

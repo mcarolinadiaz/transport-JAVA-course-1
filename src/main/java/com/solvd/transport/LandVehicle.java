@@ -76,4 +76,7 @@ abstract class LandVehicle extends Vehicle {
     }
 
     public abstract void startUp();
+    public Roads.RoadCondition getRoadConditionByNumber(int roadNumber) {
+        return this.suitableTerrain.get(roadNumber).getRoadCondition();
+    }
 }

@@ -40,7 +40,7 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
         this.doors = 4;
         this.lowBattery = true;
         this.doorsClosed = new ArrayList<Boolean>();
-        this.closeDoors();
+        this.initDoorsClosed();
         iDoors = (x) -> {
             for (int i=0; i < this.doors; i++) {
                 if (i >= this.doorsClosed.size()) {
@@ -55,7 +55,7 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
         super(model, year, propulsion, wheels, suitableTerrain);
         this.doors = doors;
         this.doorsClosed = new ArrayList<Boolean>();
-        this.closeDoors();
+        this.initDoorsClosed();
         this.lowBattery = true;
         iDoors = (x) -> {
             for (int i=0; i < this.doors; i++) {
@@ -66,6 +66,11 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
                 }
             }
         };
+    }
+    private void initDoorsClosed() {
+        for (int i=0; i< this.doors; i++) {
+            this.doorsClosed.add(true);
+        }
     }
 
     // Getters & Setters
@@ -131,7 +136,9 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
      * Existing doors are set to the open state (true).
      */
     public void openDoors() {
-        this.iDoors.openClose(true);
+        if (this.iDoors != null) {
+            this.iDoors.openClose(true);
+        }
     }
     /**
      * Closes the doors of the car.
@@ -139,7 +146,9 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
      * Existing doors are set to the closed state (false).
      */
     public void closeDoors() {
-        this.iDoors.openClose(false);
+        if (this.iDoors != null) {
+            this.iDoors.openClose(false);
+        }
     }
 
     public boolean areDoorsClosed() {

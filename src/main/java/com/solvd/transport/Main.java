@@ -88,10 +88,16 @@ public class Main {
         run.run();
 
         // Create 3 custom Lambda functions with generics.
-        Car car = new Car();
-        car.startUp();
+        try (Car car = new Car()) {
+            car.startUp();
+        } catch (NotClosedException e) {
+            System.out.println("Exception message: " + e.getMessage());
+        }
         bus.embarkPassengers(List.of("Anna", "John"));
         LOGGER.info("The total of the collection of fee is: "+bus.collectFees(30));
+
+        // Use of the complex enum Roads
+        LOGGER.info("The road condition of the two road from the bus is: "+ bus.getRoadConditionByNumber(2));
 
 
     }

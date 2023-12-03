@@ -18,3 +18,7 @@ The number of the unique words in this file is: 9
 The number of the unique words in this file is: 8
 The number of the unique words in this file is: 7
 The number of the unique words in this file is: 6
+The number of the unique words in this file is: 5
+The number of the unique words in this file is: 4
+The number of the unique words in this file is: 5
+The number of the unique words in this file is: 5

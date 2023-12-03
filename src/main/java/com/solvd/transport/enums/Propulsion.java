@@ -1,5 +1,7 @@
 package com.solvd.transport.enums;
-
+/**
+ * Enum representing different types of propulsion and their associated fuel types.
+ */
 public enum Propulsion {
     GASOLINE("gasoline", FuelType.LIQUID),
     DIESEL("diesel", FuelType.LIQUID),
@@ -26,6 +28,9 @@ public enum Propulsion {
         this.propulsion = propulsion;
     }
 
+    /**
+     * Enums representing different states of fuel.
+     */
     public enum FuelType {
         LIQUID("Liquid"),
         GAS("Gas"),
