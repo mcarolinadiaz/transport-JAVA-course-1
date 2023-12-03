@@ -51,4 +51,13 @@ practice-8:
 - Write the result to the file. 
 - The main requirement is: using StringUtils and FileUtils to implement it with minimum lines of code.
 
+practice-9:
+- Use at least 5 lambda functions from the java.util.function package.
+- Create 3 custom Lambda functions with generics.
+- Create 5 complex Enums(with fields, methods, blocks).
+
+practice-10:
+- Add 7 collection streaming in the hierarchy with terminal and non-terminal operations.
+- Using reflection extract information(modifiers, return types, parameters, etc) about fields, constructors, methods. Create object and call method using the only reflection.
+
 
