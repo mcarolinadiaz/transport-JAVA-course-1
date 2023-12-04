@@ -141,6 +141,7 @@ public class Main {
         // Using reflection extract information
         try {
             Class anyClass = Class.forName(args[0]);
+            Constructor c1;
             // Fields
             Field[] fields = anyClass.getDeclaredFields();
             for (Field field : fields) {
@@ -163,6 +164,16 @@ public class Main {
                 for (Parameter parameter : parameters) {
                     LOGGER.info("    Parameter: " + parameter.getName() + ", Type: " + parameter.getType());
                 }
+            }
+            // Create object
+            if (constructors != null) {
+                c1 = constructors[0];
+                // if the constructor is private
+                c1.setAccessible(true);
+                Object anyObject = c1.newInstance();
+                Method method = anyClass.getDeclaredMethod("startUp");
+                //call the method 'startUp' of the instance
+                method.invoke(anyObject);
             }
         } catch (ClassNotFoundException e) {
             LOGGER.error("Class not found: " + e.getMessage());
