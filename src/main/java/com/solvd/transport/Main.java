@@ -112,6 +112,28 @@ public class Main {
         bus.setPropulsion(Propulsion.DIESEL);
         LOGGER.info("The number of liquid fuel is: "+ bus.getKindOfPropulsion("Liquid"));
 
+        bus.setSuitableTerrain(List.of(Roads.GRAVEL, Roads.MURRUM));
+
+        // list of Roads with durability greater than or equal to 5.
+        List<Roads> roadsList = new ArrayList<>();
+        roadsList = bus.getAllMaxDurability(5);
+        LOGGER.info("List of Roads with durability greater than or equal to 5 in the bus: "+roadsList);
+
+        // list of roads with poor condition.
+        roadsList = bus.getAllRoadsByCondition(Roads.RoadCondition.POOR);
+        LOGGER.info("List of Roads with poor condition in the bus: "+roadsList);
+
+        // list of roads name with good condition.
+        List<String> roadsNameList = new ArrayList<>();
+        roadsNameList = bus.getAllRoadsNameByCondition(Roads.RoadCondition.GOOD);
+        LOGGER.info("List of roads name with good condition in the bus: "+roadsNameList);
+
+        bus.setPropulsion(Propulsion.NATURAL_GAS);
+
+        // List of propulsion types that start with the specific string.
+        List<String> propNameList = new ArrayList<>();
+        propNameList = bus.getAllByPropulsionName("Gas");
+        LOGGER.info("List of propulsion that start with 'gas' in the Bus: "+ propNameList);
     }
 
 

@@ -30,6 +30,7 @@ abstract class Vehicle {
     public Vehicle(String model, int year, Propulsion propulsion) {
         this.model = model;
         this.year = year;
+        this.propulsions = new ArrayList<>();
         this.setPropulsion(propulsion);
     }
 
@@ -80,21 +81,26 @@ abstract class Vehicle {
     public abstract void startUp();
 
     /**
-     * @param fuelType kind of fueld
-     * @return a list of propulsion
+     * Gets a list of propulsion types based on the given fuel type.
+     * @param fuelType The fuel type to filter by.
+     * @return List of propulsion types.
      */
     public List<String> getKindOfPropulsion(String fuelType) {
         return this.propulsions.stream()
-                .filter(prop -> prop.getFuelType().getType().equals(fuelType))
+                .filter(prop -> prop.getFuelType().getType().equals(fuelType.toLowerCase()))
                 .map(prop -> prop.getPropulsion())
                 .distinct()
                 .collect(Collectors.toList());
     }
-
+    /**
+     * Gets a list of propulsion types that start with the specified name.
+     * @param propulsion The name of the propulsion type.
+     * @return List of propulsion types with the specified name.
+     */
     public List<String> getAllByPropulsionName(String propulsion) {
         return this.propulsions.stream()
                 .map(prop -> prop.getPropulsion())
-                .filter(propPropulsion -> propPropulsion.equals(propulsion))
+                .filter(propPropulsion -> propPropulsion.startsWith(propulsion.toLowerCase()))
                 .distinct()
                 .collect(Collectors.toList());
     }

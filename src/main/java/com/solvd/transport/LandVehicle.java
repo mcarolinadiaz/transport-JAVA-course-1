@@ -78,13 +78,19 @@ abstract class LandVehicle extends Vehicle {
     }
 
     public abstract void startUp();
+    /**
+     * Gets the road condition of the terrain at the specified index.
+     * @param roadNumber The index of the road.
+     * @return The road condition of the terrain.
+     */
     public Roads.RoadCondition getRoadConditionByNumber(int roadNumber) {
         return this.suitableTerrain.get(roadNumber).getRoadCondition();
     }
 
     /**
-     * @param roadC
-     * @return
+     * Gets a list of roads with the specified road condition.
+     * @param roadC The road condition to filter by.
+     * @return List of roads with the specified road condition.
      */
     public List<Roads> getAllRoadsByCondition(Roads.RoadCondition roadC) {
         return this.suitableTerrain.stream()
@@ -93,8 +99,9 @@ abstract class LandVehicle extends Vehicle {
     }
 
     /**
-     * @param roadC
-     * @return
+     * Gets a list of terrain names(names of Roads) with the specified road condition.
+     * @param roadC The road condition to filter by.
+     * @return List of roads names with the specified road condition.
      */
     public List<String> getAllRoadsNameByCondition(Roads.RoadCondition roadC) {
         return this.suitableTerrain.stream()
@@ -102,10 +109,10 @@ abstract class LandVehicle extends Vehicle {
                 .map(road -> road.getRoad())
                 .collect(Collectors.toList());
     }
-
     /**
-     * @param durability
-     * @return
+     * Gets a list of terrains(Roads) with durability greater than or equal to the specified value.
+     * @param durability The minimum durability.
+     * @return List of terrains with durability above the param number.
      */
     public List<Roads> getAllMaxDurability(int durability) {
         return this.suitableTerrain.stream()

@@ -25,4 +25,12 @@ public enum LorryBrand {
     public void setCountry(Country country) {
         this.country.setCountry(country.getCountry());
     }
+
+    @Override
+    public String toString() {
+        return "LorryBrand{" +
+                "brandName='" + brandName + '\'' +
+                ", country=" + country +
+                '}';
+    }
 }

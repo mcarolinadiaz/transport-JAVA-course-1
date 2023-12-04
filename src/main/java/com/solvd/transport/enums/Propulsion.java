@@ -55,8 +55,22 @@ public enum Propulsion {
         public void setType(String type) {
             this.type = type;
         }
+
+        @Override
+        public String toString() {
+            return "FuelType{" +
+                    "type='" + type + '\'' +
+                    '}';
+        }
     }
 
+    @Override
+    public String toString() {
+        return "Propulsion{" +
+                "propulsion='" + propulsion + '\'' +
+                ", fuelType=" + fuelType +
+                '}';
+    }
 }
 
 

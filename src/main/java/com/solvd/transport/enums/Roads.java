@@ -60,6 +60,14 @@ public enum Roads {
         public void setCondition(String condition) {
             this.condition = condition;
         }
+
+
+        @Override
+        public String toString() {
+            return "RoadCondition{" +
+                    "condition='" + condition + '\'' +
+                    '}';
+        }
     }
     /**
      * Get the road condition based on durability.
@@ -78,4 +86,11 @@ public enum Roads {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Roads{" +
+                "road='" + road + '\'' +
+                ", durability=" + durability +
+                '}';
+    }
 }
