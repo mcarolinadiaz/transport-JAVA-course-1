@@ -28,6 +28,14 @@ public enum Propulsion {
         this.propulsion = propulsion;
     }
 
+    public FuelType getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(FuelType fuelType) {
+        this.fuelType = fuelType;
+    }
+
     /**
      * Enums representing different states of fuel.
      */
@@ -47,8 +55,22 @@ public enum Propulsion {
         public void setType(String type) {
             this.type = type;
         }
+
+        @Override
+        public String toString() {
+            return "FuelType{" +
+                    "type='" + type + '\'' +
+                    '}';
+        }
     }
 
+    @Override
+    public String toString() {
+        return "Propulsion{" +
+                "propulsion='" + propulsion + '\'' +
+                ", fuelType=" + fuelType +
+                '}';
+    }
 }
 
 

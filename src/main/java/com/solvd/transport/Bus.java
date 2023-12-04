@@ -1,6 +1,7 @@
 package com.solvd.transport;
 
 import com.solvd.transport.enums.BusBrand;
+import com.solvd.transport.enums.Propulsion;
 import com.solvd.transport.enums.Roads;
 import com.solvd.transport.interfaces.ICalculateFee;
 import com.solvd.transport.interfaces.IEmbark;
@@ -34,7 +35,7 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
     /**
      * Custom constructor to set values for a Bus.
      */
-    public Bus(String model, int year, String propulsion, int wheels,
+    public Bus(String model, int year, Propulsion propulsion, int wheels,
                List<Roads> suitableTerrain, int availableSeats) {
         super(model, year, propulsion, wheels, suitableTerrain);
         this.availableSeats = availableSeats;
@@ -95,11 +96,11 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
         super.setYear(year);
     }
 
-    public String getPropulsion() {
+    public List<Propulsion> getPropulsion() {
         return super.getPropulsion();
     }
 
-    public void setPropulsion(String propulsion) {
+    public void setPropulsion(Propulsion propulsion) {
         super.setPropulsion(propulsion);
     }
 
@@ -189,5 +190,11 @@ public class Bus extends LandVehicle implements IPublicTransport, IEmbark {
             }
             this.setAvailableSeats(newCountSeats);
         }
+    }
+
+    public int getCountPassengers(String name) {
+        return Long.valueOf(this.passengers.stream()
+                .filter(passenger -> passenger.startsWith(name))
+                .count()).intValue();
     }
 }

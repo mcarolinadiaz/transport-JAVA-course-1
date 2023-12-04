@@ -1,8 +1,10 @@
 package com.solvd.transport;
 
+import com.solvd.transport.enums.Propulsion;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
 import java.util.Objects;
 /**
  * Submarine class representing a water vehicle.
@@ -24,7 +26,7 @@ public class Submarine extends WaterVehicle {
         this.isSubmerge = false;
     }
     // Custom constructor
-    public Submarine(String model, int year, String propulsion, int length, int depth) {
+    public Submarine(String model, int year, Propulsion propulsion, int length, int depth) {
         super(model, year, propulsion, length);
         this.setDepth(depth);
         this.isSubmerge = false;
@@ -71,11 +73,11 @@ public class Submarine extends WaterVehicle {
         super.setYear(year);
     }
 
-    public String getPropulsion() {
+    public List<Propulsion> getPropulsion() {
         return super.getPropulsion();
     }
 
-    public void setPropulsion(String propulsion) {
+    public void setPropulsion(Propulsion propulsion) {
         super.setPropulsion(propulsion);
     }
 

@@ -1,9 +1,11 @@
 package com.solvd.transport;
 
+import com.solvd.transport.enums.Propulsion;
 import com.solvd.transport.enums.Roads;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /** Abstract class representing a generic land vehicle that is kind of
  * a vehicle in the Transport hierarchy.
@@ -20,7 +22,7 @@ abstract class LandVehicle extends Vehicle {
         this.suitableTerrain = new ArrayList<>();
     }
     // Custom constructor
-    public LandVehicle(String model, int year, String propulsion,
+    public LandVehicle(String model, int year, Propulsion propulsion,
                        int wheels, List<Roads> suitableTerrain) {
         super(model, year, propulsion);
         this.wheels = wheels;
@@ -67,16 +69,55 @@ abstract class LandVehicle extends Vehicle {
         super.setYear(year);
     }
 
-    public String getPropulsion() {
+    public List<Propulsion> getPropulsion() {
         return super.getPropulsion();
     }
 
-    public void setPropulsion(String propulsion) {
+    public void setPropulsion(Propulsion propulsion) {
         super.setPropulsion(propulsion);
     }
 
     public abstract void startUp();
+    /**
+     * Gets the road condition of the terrain at the specified index.
+     * @param roadNumber The index of the road.
+     * @return The road condition of the terrain.
+     */
     public Roads.RoadCondition getRoadConditionByNumber(int roadNumber) {
         return this.suitableTerrain.get(roadNumber).getRoadCondition();
     }
+
+    /**
+     * Gets a list of roads with the specified road condition.
+     * @param roadC The road condition to filter by.
+     * @return List of roads with the specified road condition.
+     */
+    public List<Roads> getAllRoadsByCondition(Roads.RoadCondition roadC) {
+        return this.suitableTerrain.stream()
+                .filter(road -> road.getRoadCondition().getCondition().equals(roadC.getCondition()))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Gets a list of terrain names(names of Roads) with the specified road condition.
+     * @param roadC The road condition to filter by.
+     * @return List of roads names with the specified road condition.
+     */
+    public List<String> getAllRoadsNameByCondition(Roads.RoadCondition roadC) {
+        return this.suitableTerrain.stream()
+                .filter(road -> road.getRoadCondition().equals(roadC))
+                .map(road -> road.getRoad())
+                .collect(Collectors.toList());
+    }
+    /**
+     * Gets a list of terrains(Roads) with durability greater than or equal to the specified value.
+     * @param durability The minimum durability.
+     * @return List of terrains with durability above the param number.
+     */
+    public List<Roads> getAllMaxDurability(int durability) {
+        return this.suitableTerrain.stream()
+                .filter(r -> r.getDurability() >= durability)
+                .collect(Collectors.toList());
+    }
+
 }

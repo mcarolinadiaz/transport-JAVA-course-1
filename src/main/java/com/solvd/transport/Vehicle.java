@@ -2,7 +2,10 @@ package com.solvd.transport;
 
 import com.solvd.transport.enums.Propulsion;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Abstract class representing a generic vehicle in the Transport hierarchy.
@@ -11,21 +14,23 @@ import java.util.List;
 abstract class Vehicle {
     protected String model;         // Model of the vehicle
     protected int year;             // Year of the vehicle
-    protected String propulsion;    // Type of propulsion (e.g., petrol, jet fuel)
+    protected List<Propulsion> propulsions;
     /**
      * Default constructor initializes instance variables with default values.
      */
     public Vehicle() {
         this.model = "";
         this.year = 2023;
-        this.propulsion = "gasoline";
+        this.propulsions = new ArrayList<>();
+        this.propulsions.add(Propulsion.GASOLINE);
     }
     /**
      * Custom constructor allows setting initial values for model, year, and propulsion.
      */
-    public Vehicle(String model, int year, String propulsion) {
+    public Vehicle(String model, int year, Propulsion propulsion) {
         this.model = model;
         this.year = year;
+        this.propulsions = new ArrayList<>();
         this.setPropulsion(propulsion);
     }
 
@@ -50,23 +55,23 @@ abstract class Vehicle {
         this.year = year;
     }
 
-    public String getPropulsion() {
-        return propulsion;
+    public List<Propulsion> getPropulsion() {
+        return this.propulsions;
     }
 
-    public void setPropulsion(String propulsion) throws InvalidPropulsion {
-        boolean match = false;
-        for (Propulsion p : Propulsion.values()) {
-            if (p.getPropulsion().equals(propulsion)) {
-                this.propulsion = propulsion;
-                match = true;
-                break;
-            }
-        }
-        if (!match) {
+    /**
+     * @param propulsion
+     * @throws InvalidPropulsion
+     */
+    public void setPropulsion(Propulsion propulsion) throws InvalidPropulsion {
+        int count = Long.valueOf(Arrays.stream(Propulsion.values())
+                .filter(prop -> prop.getPropulsion().equals(propulsion.getPropulsion()))
+                .count()).intValue();
+        if (count > 0) {
+                this.propulsions.add(propulsion);
+        } else {
             throw new InvalidPropulsion("It's invalid propulsion");
         }
-        this.propulsion = propulsion;
     }
 
     /**
@@ -74,6 +79,31 @@ abstract class Vehicle {
      * Subclasses must provide their own implementation.
      */
     public abstract void startUp();
+
+    /**
+     * Gets a list of propulsion types based on the given fuel type.
+     * @param fuelType The fuel type to filter by.
+     * @return List of propulsion types.
+     */
+    public List<String> getKindOfPropulsion(String fuelType) {
+        return this.propulsions.stream()
+                .filter(prop -> prop.getFuelType().getType().equals(fuelType.toLowerCase()))
+                .map(prop -> prop.getPropulsion())
+                .distinct()
+                .collect(Collectors.toList());
+    }
+    /**
+     * Gets a list of propulsion types that start with the specified name.
+     * @param propulsion The name of the propulsion type.
+     * @return List of propulsion types with the specified name.
+     */
+    public List<String> getAllByPropulsionName(String propulsion) {
+        return this.propulsions.stream()
+                .map(prop -> prop.getPropulsion())
+                .filter(propPropulsion -> propPropulsion.startsWith(propulsion.toLowerCase()))
+                .distinct()
+                .collect(Collectors.toList());
+    }
 
 
 }

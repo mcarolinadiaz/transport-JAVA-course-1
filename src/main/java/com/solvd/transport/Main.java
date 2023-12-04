@@ -1,6 +1,6 @@
 package com.solvd.transport;
 
-import com.solvd.transport.enums.Roads;
+import com.solvd.transport.enums.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +14,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+
+import java.lang.reflect.*;
 
 /**
  * This class reads a text file, counts the number of unique words, and logs the result.
@@ -70,7 +72,7 @@ public class Main {
         }
         //-------------------------------------------------------------------------------//
         // Use at least 5 lambda functions from the java.util.function package.
-        Bus bus = new Bus("MOD20", 2005, "gasoline", 4,
+        Bus bus = new Bus("MOD20", 2005, Propulsion.GASOLINE, 4,
                 List.of(Roads.CRONCRETE, Roads.ASPHALT), 50);
         Consumer<String> c = (x) -> LOGGER.info(StringUtils.upperCase(x));
         String busString = bus.toString();
@@ -90,16 +92,94 @@ public class Main {
         // Create 3 custom Lambda functions with generics.
         try (Car car = new Car()) {
             car.startUp();
+            car.setCarBrand(CarBrand.HONDA);
         } catch (NotClosedException e) {
             System.out.println("Exception message: " + e.getMessage());
         }
-        bus.embarkPassengers(List.of("Anna", "John"));
+        bus.embarkPassengers(List.of("Anna", "John", "Sean", "Jacob", "Tiffany"));
         LOGGER.info("The total of the collection of fee is: "+bus.collectFees(30));
 
         // Use of the complex enum Roads
         LOGGER.info("The road condition of the two road from the bus is: "+ bus.getRoadConditionByNumber(2));
 
+        // Add 7 collection streaming in the hierarchy with terminal and non-terminal operations
+        bus.setBusBrand(BusBrand.MERCEDES);
+        Lorry lorry = new Lorry();
+        lorry.setLorryBrand(LorryBrand.SCANIA);
+        Bus bus1 = new Bus();
+        bus1.setBusBrand(BusBrand.VOLVO);
 
+        LOGGER.info("The number of passengers inside the bus that the name start with 'J' is: "+ bus.getCountPassengers("J"));
+
+        bus.setPropulsion(Propulsion.DIESEL);
+        LOGGER.info("The number of liquid fuel is: "+ bus.getKindOfPropulsion("Liquid"));
+
+        bus.setSuitableTerrain(List.of(Roads.GRAVEL, Roads.MURRUM));
+
+        // list of Roads with durability greater than or equal to 5.
+        List<Roads> roadsList = new ArrayList<>();
+        roadsList = bus.getAllMaxDurability(5);
+        LOGGER.info("List of Roads with durability greater than or equal to 5 in the bus: "+roadsList);
+
+        // list of roads with poor condition.
+        roadsList = bus.getAllRoadsByCondition(Roads.RoadCondition.POOR);
+        LOGGER.info("List of Roads with poor condition in the bus: "+roadsList);
+
+        // list of roads name with good condition.
+        List<String> roadsNameList = new ArrayList<>();
+        roadsNameList = bus.getAllRoadsNameByCondition(Roads.RoadCondition.GOOD);
+        LOGGER.info("List of roads name with good condition in the bus: "+roadsNameList);
+
+        bus.setPropulsion(Propulsion.NATURAL_GAS);
+
+        // List of propulsion types that start with the specific string.
+        List<String> propNameList = new ArrayList<>();
+        propNameList = bus.getAllByPropulsionName("Gas");
+        LOGGER.info("List of propulsion that start with 'gas' in the Bus: "+ propNameList);
+
+        // ----------------------------------------------------------------------------//
+        // Using reflection extract information
+        try {
+            Class anyClass = Class.forName(args[0]);
+            Constructor c1;
+            // Fields
+            Field[] fields = anyClass.getDeclaredFields();
+            for (Field field : fields) {
+                LOGGER.info("Field: " + field.getName() + ", Type: " + field.getType() + ", Modifiers: " + Modifier.toString(field.getModifiers()));
+            }
+            // Methods
+            Method[] methods = anyClass.getDeclaredMethods();
+            for (Method method : methods) {
+                LOGGER.info("Method: " + method.getName() + ", Return Type: " + method.getReturnType() + ", Modifiers: " + Modifier.toString(method.getModifiers()));
+                Parameter[] parameters = method.getParameters();
+                for (Parameter parameter : parameters) {
+                    LOGGER.info("    Parameter: " + parameter.getName() + ", Type: " + parameter.getType());
+                }
+            }
+            // Constructors
+            Constructor[] constructors = anyClass.getDeclaredConstructors();
+            for (Constructor<?> constructor : constructors) {
+                LOGGER.info("Constructor: " + constructor.getName() + ", Modifiers: " + Modifier.toString(constructor.getModifiers()));
+                Parameter[] parameters = constructor.getParameters();
+                for (Parameter parameter : parameters) {
+                    LOGGER.info("    Parameter: " + parameter.getName() + ", Type: " + parameter.getType());
+                }
+            }
+            // Create object
+            if (constructors != null) {
+                c1 = constructors[0];
+                // if the constructor is private
+                c1.setAccessible(true);
+                Object anyObject = c1.newInstance();
+                Method method = anyClass.getDeclaredMethod("startUp");
+                //call the method 'startUp' of the instance
+                method.invoke(anyObject);
+            }
+        } catch (ClassNotFoundException e) {
+            LOGGER.error("Class not found: " + e.getMessage());
+        } catch (Throwable e) {
+            LOGGER.error("An error occurred: " + e.getMessage());
+        }
     }
 
 

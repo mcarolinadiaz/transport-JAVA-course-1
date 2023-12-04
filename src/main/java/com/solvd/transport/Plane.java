@@ -1,5 +1,6 @@
 package com.solvd.transport;
 
+import com.solvd.transport.enums.Propulsion;
 import com.solvd.transport.interfaces.IEmbark;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,7 +25,7 @@ public class Plane extends AirVehicle implements IEmbark {
         this.flying = false;
         this.passengers = new ArrayList<>();
     }
-    public Plane(String model, int year, String propulsion, int availableSeats) {
+    public Plane(String model, int year, Propulsion propulsion, int availableSeats) {
         super(model, year, propulsion);
         this.availableSeats = availableSeats;
         this.flying = true;
@@ -78,11 +79,11 @@ public class Plane extends AirVehicle implements IEmbark {
         super.setYear(year);
     }
 
-    public String getPropulsion() {
+    public List<Propulsion> getPropulsion() {
         return super.getPropulsion();
     }
 
-    public void setPropulsion(String propulsion) {
+    public void setPropulsion(Propulsion propulsion) {
         super.setPropulsion(propulsion);
     }
 
@@ -118,8 +119,7 @@ public class Plane extends AirVehicle implements IEmbark {
         return this.getAvailableSeats() == p.getAvailableSeats() &&
                 this.flying == p.isFlying() &&
                 Objects.equals(this.getModel(), p.getModel()) &&
-                this.getYear() == p.getYear() &&
-                Objects.equals(this.propulsion, p.getPropulsion());
+                this.getYear() == p.getYear();
 
     }
     /**
@@ -203,4 +203,6 @@ public class Plane extends AirVehicle implements IEmbark {
             LOGGER.error("Error: " + e.getMessage());
         }
     }
+
+
 }

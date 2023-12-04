@@ -1,6 +1,7 @@
 package com.solvd.transport;
 
 import com.solvd.transport.enums.CarBrand;
+import com.solvd.transport.enums.Propulsion;
 import com.solvd.transport.enums.Roads;
 import com.solvd.transport.interfaces.IDoors;
 import com.solvd.transport.interfaces.IElectricTransport;
@@ -51,7 +52,7 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
             }
         };
     }
-    public Car(String model, int year, String propulsion, int wheels, List<Roads> suitableTerrain, int doors) {
+    public Car(String model, int year, Propulsion propulsion, int wheels, List<Roads> suitableTerrain, int doors) {
         super(model, year, propulsion, wheels, suitableTerrain);
         this.doors = doors;
         this.doorsClosed = new ArrayList<Boolean>();
@@ -114,11 +115,11 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
         super.setYear(year);
     }
 
-    public String getPropulsion() {
+    public List<Propulsion> getPropulsion() {
         return super.getPropulsion();
     }
 
-    public void setPropulsion(String propulsion) {
+    public void setPropulsion(Propulsion propulsion) {
         super.setPropulsion(propulsion);
     }
 
@@ -188,7 +189,7 @@ public final class Car extends LandVehicle implements IElectricTransport, AutoCl
                 ", wheels=" + wheels +
                 ", model='" + model + '\'' +
                 ", year=" + year +
-                ", propulsion='" + propulsion + '\'' +
+                ", propulsion='" + propulsions + '\'' +
                 '}';
     }
 }
