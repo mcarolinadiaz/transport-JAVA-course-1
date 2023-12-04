@@ -15,6 +15,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import java.lang.reflect.*;
+
 /**
  * This class reads a text file, counts the number of unique words, and logs the result.
  */
@@ -134,6 +136,39 @@ public class Main {
         List<String> propNameList = new ArrayList<>();
         propNameList = bus.getAllByPropulsionName("Gas");
         LOGGER.info("List of propulsion that start with 'gas' in the Bus: "+ propNameList);
+
+        // ----------------------------------------------------------------------------//
+        // Using reflection extract information
+        try {
+            Class anyClass = Class.forName(args[0]);
+            // Fields
+            Field[] fields = anyClass.getDeclaredFields();
+            for (Field field : fields) {
+                LOGGER.info("Field: " + field.getName() + ", Type: " + field.getType() + ", Modifiers: " + Modifier.toString(field.getModifiers()));
+            }
+            // Methods
+            Method[] methods = anyClass.getDeclaredMethods();
+            for (Method method : methods) {
+                LOGGER.info("Method: " + method.getName() + ", Return Type: " + method.getReturnType() + ", Modifiers: " + Modifier.toString(method.getModifiers()));
+                Parameter[] parameters = method.getParameters();
+                for (Parameter parameter : parameters) {
+                    LOGGER.info("    Parameter: " + parameter.getName() + ", Type: " + parameter.getType());
+                }
+            }
+            // Constructors
+            Constructor[] constructors = anyClass.getDeclaredConstructors();
+            for (Constructor<?> constructor : constructors) {
+                LOGGER.info("Constructor: " + constructor.getName() + ", Modifiers: " + Modifier.toString(constructor.getModifiers()));
+                Parameter[] parameters = constructor.getParameters();
+                for (Parameter parameter : parameters) {
+                    LOGGER.info("    Parameter: " + parameter.getName() + ", Type: " + parameter.getType());
+                }
+            }
+        } catch (ClassNotFoundException e) {
+            LOGGER.error("Class not found: " + e.getMessage());
+        } catch (Throwable e) {
+            LOGGER.error("An error occurred: " + e.getMessage());
+        }
     }
 
 
