@@ -60,4 +60,18 @@ practice-10:
 - Add 7 collection streaming in the hierarchy with terminal and non-terminal operations.
 - Using reflection extract information(modifiers, return types, parameters, etc) about fields, constructors, methods. Create object and call method using the only reflection.
 
+practice-11:
+- Create 2 Threads using Runnable and Thread.
 
+- Create Connection Pool. 
+- Use collection from java.util.concurrent package. 
+- Connection class may be mocked. 
+- The pool should be threadsafe and lazy initialized. 
+
+- Initialize pool with 5 sizes. 
+- Load Connection Pool using threads and Thread Pool(7 threads). 
+- 5 threads should be able to get the connection. 
+- 2 Threads should wait for the next available connection. 
+- The program should wait as well.
+
+- Implement 4th part but with IFuture and CompletableStage.
