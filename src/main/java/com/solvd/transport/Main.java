@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -48,7 +49,7 @@ public class Main {
     /**
      * Main method that reads lines from a file, processes them, and logs the result.
      */
-    public static void main(String[] args) throws IOException, InvalidOperationException {
+    public static void main(String[] args) throws IOException, InvalidOperationException, InterruptedException {
         try {
             // Reading lines from the file using FileUtils
             List<String> lines = FileUtils.readLines(new File("practice-8.txt"));
@@ -184,12 +185,56 @@ public class Main {
         }
 
         //--------------------------------------------------------------------------------//
-        // Thread section
+        // Thread section - Create a Connection pool that is thread safe and lazy initialized.
+
         MyThreadExtended threadExtended = new MyThreadExtended();
         Thread threadImplemented = new Thread(new MyThreadImplemented());
 
+
+        // Initialize pool with 5 sizes.
+        MyThreadExtended thread3 = new MyThreadExtended();
+        Thread thread4 = new Thread(new MyThreadImplemented());
+        MyThreadExtended thread5 = new MyThreadExtended();
+        Thread thread6 = new Thread(new MyThreadImplemented());
+        MyThreadExtended thread7 = new MyThreadExtended();
+/*
         threadExtended.start();
+        threadExtended.setName("Thread1");
         threadImplemented.start();
+        threadImplemented.setName("Thread2");
+        thread3.start();
+        thread3.setName("Thread3");
+        thread4.start();
+        thread4.setName("Thread4");
+        thread5.start();
+        thread5.setName("Thread5");
+        thread6.start();
+        thread6.setName("Thread6");
+        thread7.start();
+        thread7.setName("Thread7");
+
+        // it ensures that the program waits for these threads.
+        threadExtended.join();
+        threadImplemented.join();
+        thread3.join();
+        thread4.join();
+        thread5.join();
+        thread6.join();
+        thread7.join();
+*/
+        CompletableFuture<Void> completableFuture = CompletableFuture.allOf(
+                CompletableFuture.runAsync(threadExtended),
+                CompletableFuture.runAsync(threadImplemented),
+                CompletableFuture.runAsync(thread3),
+                CompletableFuture.runAsync(thread4),
+                CompletableFuture.runAsync(thread5),
+                CompletableFuture.runAsync(thread6),
+                CompletableFuture.runAsync(thread7)
+        );
+
+        // it ensures that the program waits for these threads.
+        completableFuture.join();
+
     }
 
 

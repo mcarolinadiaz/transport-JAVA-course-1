@@ -4,8 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -15,7 +13,7 @@ public class MyConnectionPool {
     private static MyConnectionPool instance;
     // collection from java.util.concurrent package.
     private BlockingQueue<Connection> connections;
-    private static final int POOL_SIZE = 10;
+    private static final int POOL_SIZE = 5;
     private MyConnectionPool() {
         connections = new ArrayBlockingQueue<>(POOL_SIZE);
         initializePool();
