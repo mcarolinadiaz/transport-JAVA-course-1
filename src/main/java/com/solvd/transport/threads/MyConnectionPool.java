@@ -20,21 +20,26 @@ public class MyConnectionPool {
         connections = new ArrayBlockingQueue<>(POOL_SIZE);
         initializePool();
     }
-    public static synchronized MyConnectionPool getInstance() {
+    public static MyConnectionPool getInstance() {
         if (instance == null) {
-            instance = new MyConnectionPool();
+            // to introduce the double check. it ensures that is threadsafe and lazy initialized in multithreading.
+            synchronized (MyConnectionPool.class) {
+                if (instance == null) {
+                    instance = new MyConnectionPool();
+                }
+            }
         }
         return instance;
     }
+
+    /**
+     * Initialize collection connections.
+     * It doesn't throw exception as we are mocking this connection pool.
+     */
     private void initializePool() {
         for (int i=0; i < POOL_SIZE; i++) {
-            /*
-            try {
-                Connection connection = null;
-                connections.add(connection);
-            } catch(SQLException e) {
-                LOGGER.error(e.getMessage());
-            }*/
+            Connection connection = new MyConnectionMock();
+            connections.add(connection);
         }
     }
 

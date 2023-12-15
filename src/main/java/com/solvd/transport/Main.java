@@ -1,6 +1,8 @@
 package com.solvd.transport;
 
 import com.solvd.transport.enums.*;
+import com.solvd.transport.threads.MyThreadExtended;
+import com.solvd.transport.threads.MyThreadImplemented;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -180,6 +182,14 @@ public class Main {
         } catch (Throwable e) {
             LOGGER.error("An error occurred: " + e.getMessage());
         }
+
+        //--------------------------------------------------------------------------------//
+        // Thread section
+        MyThreadExtended threadExtended = new MyThreadExtended();
+        Thread threadImplemented = new Thread(new MyThreadImplemented());
+
+        threadExtended.start();
+        threadImplemented.start();
     }
 
 
